@@ -5,7 +5,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
-    "test": "node --test lib/",
+    "test": "node --test 'lib/*.test.js'",
     "check": "node scripts/check.mjs"
   },
   "engines": {
