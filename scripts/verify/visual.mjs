@@ -75,12 +75,18 @@ for (const width of WIDTHS) {
     // page height while posts don't exist on the new side yet (Task 1's placeholder).
     const chromeCss = j.chromeOnly ? "article.content { display: none !important; }" : "";
     const run = (url, old) => shot(page, url, { old, postOps: j.postOps, selector: j.selector, extraCss: chromeCss });
-    let a = await run(j.oldUrl, true), b = await run(j.newUrl, false);
-    let r = compare(a.png, b.png, `verify-out/${width}/${j.name.replace(/\//g, "_")}.png`);
-    if (r.diff !== 0) { a = await run(j.oldUrl, true); b = await run(j.newUrl, false); r = compare(a.png, b.png, `verify-out/${width}/${j.name.replace(/\//g, "_")}.png`); } // one retry for network flake
-    const textOk = j.chromeOnly || j.name.startsWith("pagination") || a.text === b.text;
     const excepted = Boolean(exceptions[j.name.replace(/^(post|list)/, "")]);
-    results.push({ width, name: j.name, ...r, textOk, excepted });
+    try {
+      let a = await run(j.oldUrl, true), b = await run(j.newUrl, false);
+      let r = compare(a.png, b.png, `verify-out/${width}/${j.name.replace(/\//g, "_")}.png`);
+      if (r.diff !== 0) { a = await run(j.oldUrl, true); b = await run(j.newUrl, false); r = compare(a.png, b.png, `verify-out/${width}/${j.name.replace(/\//g, "_")}.png`); } // one retry for network flake
+      const textOk = j.chromeOnly || j.name.startsWith("pagination") || a.text === b.text;
+      results.push({ width, name: j.name, ...r, textOk, excepted });
+    } catch (e) {
+      // A pre-2018 post can hotlink a host that never responds; networkidle then
+      // hangs to the hard navigation timeout. Record as a failure, don't abort the run.
+      results.push({ width, name: j.name, diff: -1, error: e.message.split("\n")[0], textOk: false, excepted });
+    }
   }
   // Behavior: mobile nav toggles open and closes.
   if (width === 390) {
