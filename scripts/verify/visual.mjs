@@ -59,7 +59,9 @@ async function listingIndex(page, base, pages) {
   const idx = {};
   for (let n = 1; n <= pages; n++) {
     const u = n === 1 ? "/" : `/page/${n}/`;
-    await page.goto(base + u);
+    // the old tree's single-threaded http.server can stall under a page loading many
+    // hotlinked sub-resources; one retry absorbs that without failing the whole run.
+    try { await page.goto(base + u, { timeout: 30000 }); } catch { await page.goto(base + u, { timeout: 60000 }); }
     for (const href of await page.$$eval(".latest-post-title a", (as) => as.map((a) => new URL(a.href).pathname))) idx[decodeURI(href)] = u;
   }
   return idx;
