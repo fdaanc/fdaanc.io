@@ -6,7 +6,8 @@
     "start": "eleventy --serve",
     "build": "eleventy",
     "test": "node --test 'lib/*.test.js'",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "verify": "node scripts/verify/visual.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -14,6 +15,10 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
-    "js-yaml": "^5.4.2"
+    "cheerio": "^1.2.0",
+    "js-yaml": "^5.4.2",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.63.0",
+    "pngjs": "^7.0.0"
   }
 }
