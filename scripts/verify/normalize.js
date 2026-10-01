@@ -32,8 +32,9 @@ export function normalize(ops) {
     // Match whitespace-tolerantly: removing the old side's dead-link elements merges the text
     // nodes either side of them (normalize() above), which can leave an extra/missing space at
     // the join that migrate.mjs's own (cheerio-based) removal didn't produce -- a run of
-    // whitespace in `find` should still match a differently-sized run of whitespace here.
-    const pattern = new RegExp(escapeRegExp(find).replace(/\s+/g, "\\s+"), "g");
+    // whitespace in `find` should still match a differently-sized run of whitespace here,
+    // including a non-breaking space Chromium's innerHTML serializes back out as `&nbsp;`.
+    const pattern = new RegExp(escapeRegExp(find).replace(/\s+/g, "(?:\\s|&nbsp;| )+"), "g");
     const roots = ops.editSelector ? document.querySelectorAll(ops.editSelector) : [document.body];
     let status = "absent"; // find text isn't in this container at all -- not relevant to this job
     for (const root of roots) {
