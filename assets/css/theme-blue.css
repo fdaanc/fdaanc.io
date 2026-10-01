@@ -19,11 +19,6 @@ header .header-call-to-action .widget {
 	color: #fff;
 }
 
-header .header-call-to-action .widget_search {
-	background: transparent;
-	color: #555;
-}
-
 
 /* =Top Navigation
 -------------------------------------------------------------- */
@@ -71,21 +66,6 @@ nav .primary-nav li a:hover{
 }
 
 
-/* =Search Form
--------------------------------------------------------------- */
-#searchform input{
-    color: #555;
-    background: #f5f5f5;
-    border: 1px solid;
-    border-color: #362f2d;
-    border-color: rgba(0, 0, 0, .15);
-}
-
-#searchform input.submit {
-    color: #fff;
-    background: #3c639a;
-}
-
 ::-webkit-input-placeholder {
    color: #362f2d;
 }
@@ -111,15 +91,9 @@ article.content a.more-link,
 article.content a.post-edit-link,
 article.content .previous-posts a,
 article.content .next-posts a,
-article.content a.comment-reply-link,
-article.content .comment-navigation a,
 article.full-width-content a.post-edit-link,
 article.full-width-content .previous-posts a,
 article.full-width-content .next-posts a,
-article.full-width-content a.comment-reply-link,
-article.full-width-content .comment-navigation a,
-a#cancel-comment-reply-link,
-#respond input[type="submit"],
 .gform_wrapper .gform_footer input.button,
 .gform_wrapper .gform_footer input[type=submit], .button {
 	background: #f5d39b;
@@ -132,15 +106,9 @@ article.content a.more-link:hover,
 article.content a.post-edit-link:hover,
 article.content .previous-posts a:hover,
 article.content .next-posts a:hover,
-article.content a.comment-reply-link:hover,
-article.content .comment-navigation a:hover,
 article.full-width-content a.post-edit-link:hover,
 article.full-width-content .previous-posts a:hover,
 article.full-width-content .next-posts a:hover,
-article.full-width-content a.comment-reply-link:hover,
-article.full-width-content .comment-navigation a:hover,
-a#cancel-comment-reply-link:hover,
-#respond input[type="submit"]:hover,
 .gform_wrapper .gform_footer input.button:hover,
 .gform_wrapper .gform_footer input[type=submit]:hover, .button:hover {
 	background: #986819;
@@ -178,11 +146,11 @@ article.content a, article.full-width-content a {
 	color: #3c639a;
 }
 
-article.content blockquote, .comment-content blockquote, article.content table th, .comment-content table th, blockquote, table th {
+article.content blockquote, article.content table th, blockquote, table th {
 	background: #e1e6ef;
 }
 
-article.content table th, .comment-content table th, table th{
+article.content table th, table th{
 	border: 1px solid #d3dae8;
 }
 
@@ -211,14 +179,6 @@ footer.post-footer{
 	color: #08162d;
 }
 
-#post-author{
-	background: #f2f2f2;
-	color: #362f2d;
-	border: 1px solid;
-	border-color: #d7d7d7;
-	border-color: rgba(0, 0, 0, .15);
-}
-
 footer.pagination{
 	background: #f2f2f2;
 }
@@ -228,86 +188,6 @@ footer.pagination{
 -------------------------------------------------------------- */
 .widget .social-media-icons a, .footer-widget .social-media-icons a {
 	background: #3c639a;
-}
-
-
-/* =Comments
--------------------------------------------------------------- */
-.comments-container {
-	border-bottom: 1px solid #ccc;
-}
-
-.comments-area {
-	border-top: 1px solid #e0e0e0;
-}
-
-article.content .comments-area .comments-title-container h4.comments-title, article.full-width-content .comments-area .comments-title-container h4.comments-title {
-	color: #986819;
-	background: #f5d39b;
-}
-
-.comments-title:after {
-	border-width: 15px 15px 0;
-	border-style: solid;
-	border-color: #f5d39b transparent;
-}
-
-article.content ol.comment-list > li, ol.comment-list > li {
-	border-bottom: 1px dashed #986819;
-}
-
-article.content ol.comment-list > li .comment, ol.comment-list > li .comment {
-	background: #f7f5f2;
-}
-
-#comments ol.comment-list > li  article.bypostauthor {
-	background: #e1e6ef;
-}
-
-ol.comment-list > li:nth-child(even) article.comment {
-	background: #f7f1e8;
-}
-
-.comment-author {
-	background: #f2e3d0;
-	border: 1px dashed #e8c9a4;
-}
-
-#comments ol.comment-list > li  article.bypostauthor .comment-author {
-	background: #d5dce8;
-	border: 1px dashed #a6b4e0;
-}
-
-.comment-author .author-link a {
-	color: #555;
-}
-
-.comment-author .comment-meta a {
-	color: #986819;
-}
-
-#comments ol.comment-list > li  article.bypostauthor .comment-meta a { 
-	color: #769ac9;
-}
-
-#respond {
-	background: #e1e6ef;
-	border: 1px dashed #a6c3e0;
-}
-
-#respond .required {
-	color: #900;
-}
-
-#respond input, #respond textarea {
-	background: #fefefe;
-	color: #333;
-	border: 1px solid #d0d0d0;
-}
-
-#respond .form-allowed-tags {
-	background: #d3ddea;
-	border: 1px dashed #a6c3e0;
 }
 
 
@@ -447,7 +327,7 @@ section.footer-widget:hover {
 	}
 }
 			/* Content Color */
-			article.content, footer.post-footer, #post-author {
+			article.content, footer.post-footer {
 				color: #555555;
 			}
 		

@@ -10,7 +10,7 @@ const files = walk(SITE);
 // R6: no trace of the old platform or the injected script, in output or source.
 const BANNED = /wordpress|wp-|wp_|s\.w\.org|codes_iframe|ZG9jdW1lbnQ/i;
 for (const f of files.filter((f) => /\.(html|css|js|xml|txt)$/.test(f))) if (BANNED.test(fs.readFileSync(f, "utf8"))) fail.push(`banned string in ${f}`);
-const src = execSync("git ls-files", { encoding: "utf8" }).split("\n").filter((f) => f && !f.startsWith("scripts/") && fs.existsSync(f) && /\.(html|md|njk|js|css|yml|json)$/.test(f));
+const src = execSync("git ls-files", { encoding: "utf8" }).split("\n").filter((f) => f && !f.startsWith("scripts/") && fs.existsSync(f) && /\.(html|md|njk|js|css|yml|json|xml|txt)$/.test(f));
 for (const f of src) if (BANNED.test(fs.readFileSync(f, "utf8"))) fail.push(`banned string in source ${f}`);
 
 // R12: only our own script.

@@ -12,9 +12,12 @@ export default function (eleventyConfig) {
   for (const [name, fn] of Object.entries(f)) eleventyConfig.addFilter(name, fn);
   eleventyConfig.addCollection("posts", (api) =>
     api.getFilteredByGlob("content/posts/*/index.{md,html}").sort((a, b) => b.date - a.date));
+  // Ascending order: the feed plugin's template does `reverse | head(limit)`, which expects oldest-first input.
+  eleventyConfig.addCollection("postsByDate", (api) =>
+    api.getFilteredByGlob("content/posts/*/index.{md,html}").sort((a, b) => a.date - b.date));
   eleventyConfig.addPlugin(feedPlugin, {
     type: "atom", outputPath: "/feed.xml",
-    collection: { name: "posts", limit: 20 },
+    collection: { name: "postsByDate", limit: 20 },
     metadata: { language: "zh", title: "复旦大学北加州校友会", subtitle: "Fudan Alumni Association of Northern California (FDAANC)",
       base: "https://www.fdaanc.org/", author: { name: "复旦大学北加州校友会" } },
   });

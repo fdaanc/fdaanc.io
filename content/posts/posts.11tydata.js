@@ -13,7 +13,6 @@ export default {
   articleClass: "content cf",
   eleventyComputed: {
     pageTitle: (d) => `${d.title} – 复旦大学北加州校友会`,
-    resolvedSlug: effectiveSlug,
     permalink: (d) => `/${ymdPath(d.page.date)}/${effectiveSlug(d)}/`,
   },
 };
