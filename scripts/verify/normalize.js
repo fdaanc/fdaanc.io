@@ -11,10 +11,15 @@ export function normalize(ops) {
   document.querySelectorAll("#slogan, .slogan").forEach((el) => {
     el.textContent = "Fudan Alumni Association of Northern California (FDAANC)";
   });
-  for (const s of ops.remove ?? []) document.querySelectorAll(s).forEach((el) => el.remove());
-  for (const s of ops.unwrap ?? []) document.querySelectorAll(s).forEach((el) => el.replaceWith(...el.childNodes));
-  document.querySelectorAll("img.wp-smiley, img.emoji").forEach((img) => img.replaceWith(img.alt));
-  document.querySelectorAll("embed[type='application/x-shockwave-flash']").forEach((el) => el.remove());
+  // Removing/unwrapping a node leaves its parent with adjacent split text nodes (the text
+  // either side of where the node was). Chromium shapes and kerns a text run differently
+  // across a text-node boundary than within one merged node, while the migrated side is a
+  // single serialized text node — so parent.normalize() after each DOM change keeps the two
+  // sides' text runs comparable.
+  for (const s of ops.remove ?? []) document.querySelectorAll(s).forEach((el) => { const p = el.parentNode; el.remove(); p?.normalize(); });
+  for (const s of ops.unwrap ?? []) document.querySelectorAll(s).forEach((el) => { const p = el.parentNode; el.replaceWith(...el.childNodes); p?.normalize(); });
+  document.querySelectorAll("img.wp-smiley, img.emoji").forEach((img) => { const p = img.parentNode; img.replaceWith(img.alt); p?.normalize(); });
+  document.querySelectorAll("embed[type='application/x-shockwave-flash']").forEach((el) => { const p = el.parentNode; el.remove(); p?.normalize(); });
 }
 
 // Applied to BOTH sides: third-party frames and PDF viewers render non-deterministically.

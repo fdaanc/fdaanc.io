@@ -71,6 +71,12 @@ const browser = await chromium.launch();
 const results = [];
 for (const width of WIDTHS) {
   const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+  // The old site's own (unmodified) WP emoji-detection script re-converts a native unicode
+  // emoji character back into an <img class="emoji"> client-side, undoing normalize()'s
+  // img.emoji -> alt-text replacement. The new site never requests this script, so blocking
+  // it unconditionally for the whole page is safe and keeps normalize()'s server-rendered
+  // smiley/emoji handling as the single source of truth.
+  await page.route(/wp-emoji-release\.min\.js/, (r) => r.abort());
   const oldListing = await listingIndex(page, OLD, 15), newListing = await listingIndex(page, NEW, 15);
   for (const j of jobs(oldListing, newListing)) {
     // display:none (not visibility:hidden) so the content column's box doesn't drive
