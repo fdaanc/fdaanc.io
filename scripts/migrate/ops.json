@@ -41,56 +41,102 @@
   },
   "/2019/12/09/复旦大学北加州校友会2020年理事会换届招新通知/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"https://docs.google.com/forms/d/e/1FAIpQLScrMEOJyg72dfzWpGUYi84M2kXlQhs1wuZV0a3j-nNmlJ4Hdw/viewform\"]"
+    ],
     "edited": null
   },
   "/2018/08/22/test/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"http://yclawgroup.com\"]",
+      "a[href=\"http://www.DeliaFei.com\"]",
+      "a[href=\"http://www.jennifersun.wfgopportunity.com\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2018/01/21/2018上海之夜：上海老咪道-湾区上海高校美/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "a[href=\"http://TJUAANC.org\"]",
+      "a[href=\"http://TJUAANC.org\"]"
+    ],
+    "unwrap": [
+      "a[href=\"https://link.jianshu.com/?t=http%3A%2F%2Fwww.gracegu.com%2F\"]",
+      "a[href=\"https://link.jianshu.com/?t=mailto%3Ainfo%40yclawgroup.com\"]",
+      "a[href=\"https://link.jianshu.com/?t=http%3A%2F%2Fwww.deliafei.com%2F\"]",
+      "a[href=\"https://link.jianshu.com/?t=mailto%3Awenmingm%40yahoo.com\"]",
+      "a[href=\"http://www.hollyfang.com/\"]"
+    ],
     "edited": null
   },
   "/2017/11/28/复旦大学北加州校友会理事会换届招新通知/": {
-    "remove": [],
+    "remove": [
+      "p:has(> strong > a[href=\"https://goo.gl/forms/VVvMpWCmP6pFeQI62\"])"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2017/06/26/浦江之夏欢迎你-2017-湾区上海高校联盟bbq/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://www.deliafei.com/\"]",
+      "a[href=\"http://www.gracegu.com/\"]",
+      "a[href=\"http://www.hollyfang.com/\"]",
+      "a[href=\"http://www.hollyfang.com/\"]"
+    ],
     "edited": null
   },
   "/2017/01/14/2017上海之夜-湾区上海高校新春联欢开始注册啦/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2017/01/shanghai-300x164.png\"])"
+    ],
+    "unwrap": [
+      "a[href=\"http://www.gracegu.com/\"]",
+      "a[href=\"http://www.sayweee.com/\"]"
+    ],
     "edited": null
   },
   "/2016/08/01/2015浦江之夏-上海七大高校联合夏季烧烤转载/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "a[href=\"http://www.o-tec.cn\"]",
+      "a[href=\"http://www.HollyFang.com\"]",
+      "a[href=\"http://www.sayweee.com\"]",
+      "dl:has(> dd > a[href=\"https://www.eventbrite.com/e/bbq-tickets-26869587660?from=groupmessage&isappinstalled=0#map-target\"])"
+    ],
+    "unwrap": [
+      "a[href=\"http://www.deliafei.com/\"]",
+      "a[href=\"http://www.gracegu.com/\"]"
+    ],
     "edited": null
   },
   "/2016/02/03/2016-上海之夜3月6日在fremont盛大举行/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://www.deliafei.com/\"]",
+      "a[href=\"http://www.gracegu.com/\"]"
+    ],
     "edited": null
   },
   "/2015/10/15/2015-fdaanc-board-election-notice/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"https://docs.google.com/forms/d/1Y4mgcuOP4A18P6qeL7tmbBuc5HzyUPisA3L9KTN4WQA/viewform\"]"
+    ],
     "edited": null
   },
   "/2015/07/23/2015浦江之夏-上海七大高校联合夏季烧烤/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://www.deliafei.com/\"]",
+      "a[href=\"http://www.gracegu.com/\"]",
+      "a[href=\"http:/www.gmcccloan.com/\"]"
+    ],
     "edited": null
   },
   "/2015/03/01/上海之夜三月八日在东湾酒庄登场/": {
-    "remove": [],
+    "remove": [
+      "embed[src=\"http://player.youku.com/player.php/sid/XOTA4ODEzMjQ4/v.swf\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
@@ -100,38 +146,67 @@
     "edited": null
   },
   "/2014/07/20/2014-浦江之夏-上海七大高校联合夏季烧烤/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/Shanghai_bbq_2014?authuser=0&authkey=Gv1sRgCI2hiYOu6_DZvAE&feat=embedwebsite\"] > img)"
+    ],
+    "unwrap": [
+      "a[href=\"https://picasaweb.google.com/youwenyi/Shanghai_bbq_2014?authuser=0&authkey=Gv1sRgCI2hiYOu6_DZvAE&feat=embedwebsite\"]",
+      "a[href=\"http://www.gracegu.com/\"]",
+      "a[href=\"http://www.deliafei.com/\"]"
+    ],
     "edited": null
   },
   "/2014/06/11/健康講座-（有关中医保健，转基因食物，抗癌药物/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"http://www.eventbrite.com/e/11920373157\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2014/05/15/高新区发展和招才引智的回顾和展望交流会/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"https://www.eventbrite.com/e/11599812351\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2014/02/12/2014-上海之夜视频/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "p:has(> a[href=\"http://youtu.be/xbmwKP99xnQ\"])"
+    ],
+    "unwrap": [
+      "a[href=\"http://v.youku.com/v_show/id_XNjcxMzE3OTUy.html\"]",
+      "a[href=\"http://v.youku.com/v_show/id_XNjcxMjkyODYw.html\"]",
+      "a[href=\"http://v.youku.com/v_show/id_XNjcxMzE1NjA0.html\"]"
+    ],
     "edited": null
   },
   "/2014/01/17/2014-night-of-shanghai-open-for-registration/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://morganhomeloan.com/\"]",
+      "a[href=\"http://www.deliafei.com/\"]",
+      "a[href=\"http://www.gracegu.com/\"]"
+    ],
     "edited": null
   },
   "/2013/10/14/fdaanc-board-election-for-2014-2015/": {
-    "remove": [],
+    "remove": [
+      "p:has(> a[href=\"https://docs.google.com/forms/d/1BDlMPGYDKRweZl7Eti95UDG5Zl9R2TXl_MOY4hX4_wc/viewform\"])"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2013/07/10/2013-浦江之夏-上海六大高校联合夏季烧烤/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/Shanghai_bbq_2013?authuser=0&authkey=Gv1sRgCIjv357e4tnL1QE&feat=embedwebsite\"] > img)"
+    ],
+    "unwrap": [
+      "a[href=\"https://picasaweb.google.com/youwenyi/Shanghai_bbq_2013?authuser=0&authkey=Gv1sRgCIjv357e4tnL1QE&feat=embedwebsite\"]",
+      "a[href=\"https://www.dropbox.com/sh/i9hur4dnqm5b9kf/UDxqAE9oZw?n=74905023\"]",
+      "a[href=\"http://www.deliafei.com/\"]",
+      "a[href=\"http://www.gracegu.com/\"]"
+    ],
     "edited": null
   },
   "/2013/03/28/北加州复旦大学校友会会歌的由来-徐敏子（新闻系/": {
@@ -140,103 +215,202 @@
     "edited": null
   },
   "/2013/03/14/关于向校友尹榆家人捐款的倡议书/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"http://www.mitbbs.com/article_t/NextGeneration/36083003.html\"]",
+      "a[href=\"http://www.mitbbs.com/article_t/NextGeneration/36096749.html\"]",
+      "a[href=\"http://www.mitbbs.com/article_t/NextGeneration/36100529.html\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2013/02/25/有关2013-上海之夜-的报道，照片和视频/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/2013_02_23?authuser=0&authkey=Gv1sRgCJSypNOcisHSKQ&feat=embedwebsite\"] > img)"
+    ],
+    "unwrap": [
+      "a[href=\"http://dailynews.sina.com/gb/news/usa/uslocal/singtao/20130226/09094285760.html\"]",
+      "a[href=\"http://sf.worldjournal.com/view/full_sf/21900836/article-%E7%94%B3%E5%9F%8E%E5%85%AD%E6%A0%A1%E5%8F%8B%E6%9C%83%E5%9C%98%E6%8B%9C-%E6%98%A5%E6%BB%BF%E4%B8%8A%E6%B5%B7%E4%B9%8B%E5%A4%9C?instance=sf_bull_event\"]",
+      "a[href=\"https://picasaweb.google.com/youwenyi/2013_02_23?authuser=0&authkey=Gv1sRgCJSypNOcisHSKQ&feat=embedwebsite\"]",
+      "a[href=\"http://youtu.be/Y8gOytPfD4w\"]",
+      "a[href=\"http://youtu.be/yOZVzud_-UI\"]",
+      "a[href=\"http://youtu.be/KpWPFSKY_LM\"]",
+      "a[href=\"http://youtu.be/R6TKXx_hWTw\"]"
+    ],
     "edited": null
   },
   "/2013/01/15/night-of-shanghai-2013-上海之夜/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "h2:has(> a > img[src=\"../../../../wp-content/uploads/2013/01/shanghai_night.jpg\"])",
+      "a[href=\"http://www.gingerloan.com\"]",
+      "a[href=\"http://www.gracegu.com\"]",
+      "a[href=\"http://www.farmersagent.com/lzhao\"]"
+    ],
+    "unwrap": [
+      "a[href=\"http://www.morganhomeloan.com\"]",
+      "a[href=\"http://www.deliafei.com/\"]",
+      "a[href=\"http://www.robertju.com/\"]"
+    ],
     "edited": null
   },
   "/2012/10/28/衷心祝贺复旦队获得东方明珠杯第三名！/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/East_pearl_ping_pong_2012?authuser=0&authkey=Gv1sRgCLatxtPSqdbhLA&feat=embedwebsite\"] > img)",
+      "a[href=\"http://www.pingpongmatch.com/Mystuff?command=gameshow&gnum=0&gamename=gameform&submit=Show\"]",
+      "a[href=\"http://www.pingpongmatch.com/Mystuff?command=gameshow&gnum=0&gamename=playoffopc&submit=Show\"]"
+    ],
+    "unwrap": [
+      "a[href=\"https://picasaweb.google.com/youwenyi/East_pearl_ping_pong_2012?authuser=0&authkey=Gv1sRgCLatxtPSqdbhLA&feat=embedwebsite\"]"
+    ],
     "edited": null
   },
   "/2012/07/08/2012-shanghai-alumni-summer-bbq-open-for-registration/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/Shanghai_bbq_2012?authuser=0&authkey=Gv1sRgCJnl_LLUwbbbPg&feat=embedwebsite\"] > img)"
+    ],
+    "unwrap": [
+      "a[href=\"https://picasaweb.google.com/youwenyi/Shanghai_bbq_2012?authuser=0&authkey=Gv1sRgCJnl_LLUwbbbPg&feat=embedwebsite\"]",
+      "a[href=\"http://www.4089962002.com/\"]",
+      "a[href=\"http://www.championkis.com/\"]",
+      "a[href=\"http://www.gracegu.com/\"]",
+      "a[href=\"http://www.deliafei.com/\"]",
+      "a[href=\"http://www.farmersagent.com/lshih\"]",
+      "a[href=\"http://www.sjtu-sv.org/\"]"
+    ],
     "edited": null
   },
   "/2012/07/07/cina-and-fudan-joint-event-finding-your-way-to-successful-entrepreneurship/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/Find_your_way_072612?authuser=0&authkey=Gv1sRgCMO95t6A0fSSoAE&feat=embedwebsite\"] > img)",
+      "a[href=\"http://www.eventbrite.com/event/3759988226\"]"
+    ],
+    "unwrap": [
+      "a[href=\"https://picasaweb.google.com/youwenyi/Find_your_way_072612?authuser=0&authkey=Gv1sRgCMO95t6A0fSSoAE&feat=embedwebsite\"]"
+    ],
     "edited": null
   },
   "/2012/05/06/cina-and-fudan-joint-event-essential-elements-for-successfully-launching-a-new-venture/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/Element_for_venture_052912?authuser=0&authkey=Gv1sRgCMWh4c_urYmIkQE&feat=embedwebsite\"] > img)",
+      "a[href=\"http://www.eventbrite.com/event/3179121839\"]"
+    ],
+    "unwrap": [
+      "a[href=\"https://picasaweb.google.com/youwenyi/Element_for_venture_052912?authuser=0&authkey=Gv1sRgCMWh4c_urYmIkQE&feat=embedwebsite\"]"
+    ],
     "edited": null
   },
   "/2012/05/03/周末讲座-硅谷房地产的走势，投资，资产保护和保/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/2012_03_10?authuser=0&authkey=Gv1sRgCOXi_LrmqtWucQ&feat=embedwebsite\"] > img)"
+    ],
+    "unwrap": [
+      "a[href=\"https://picasaweb.google.com/youwenyi/2012_03_10?authuser=0&authkey=Gv1sRgCOXi_LrmqtWucQ&feat=embedwebsite\"]"
+    ],
     "edited": null
   },
   "/2012/02/11/night-of-shanghai-2012-recaptured-in-picture/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4699.jpg\"])",
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_46291.jpg\"])",
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4631.jpg\"])",
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4633.jpg\"])",
+      "a:has(> img[src=\"../../../../wp-content/uploads/2012/02/IMG_4672.jpg\"])",
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4654.jpg\"])",
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_46381.jpg\"])",
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/最近更新.jpg\"])",
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4711.jpg\"])",
+      "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/Nos_2012_calligraphy_show?authuser=0&authkey=Gv1sRgCNrrnp7v54XkPQ&feat=embedwebsite\"] > img)"
+    ],
+    "unwrap": [
+      "a[href=\"https://picasaweb.google.com/youwenyi/Nos_2012_calligraphy_show?authuser=0&authkey=Gv1sRgCNrrnp7v54XkPQ&feat=embedwebsite\"]"
+    ],
     "edited": null
   },
   "/2012/02/11/choir-championship-again/": {
-    "remove": [],
+    "remove": [
+      "p:has(> embed[src=\"http://player.youku.com/player.php/sid/XMzUxMzQwNDg4/v.swf\"])"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2012/01/09/night-of-shanghai-2012/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "p:has(> img[src=\"../../../../wp-content/uploads/2012/01/nos2012.jpg\"])"
+    ],
+    "unwrap": [
+      "a[href=\"http://www.99people.com/\"]"
+    ],
     "edited": null
   },
   "/2011/09/29/2012-fdaanc-board-member-nomination-and-election/": {
-    "remove": [],
+    "remove": [
+      "p:has(> a[href=\"https://docs.google.com/spreadsheet/viewform?formkey=dHh6MkVzUV9KRzlVb3JoME9iX2I2Q0E6MQ\"])"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2011/09/13/中国海外人才招聘会/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "a:empty[href=\"../../../../wp-content/uploads/2011/09/2011中国海外人才招聘大会_Brochure.pdf\"]"
+    ],
+    "unwrap": [
+      "a[href=\"../../../../wp-content/uploads/2011/09/2011中国海外人才招聘大会.doc\"]",
+      "a[href=\"../../../../wp-content/uploads/2011/09/2011中国海外人才招聘大会_Brochure.pdf\"]"
+    ],
     "edited": null
   },
   "/2011/08/22/summer-of-pujiang-bbq-2011/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"http://www.sjtu-sv.com/summerbbq2011.html\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2011/03/16/world-alumni-conference-update/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"http://www.fudanusa.org/\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2011/02/20/the-12th-fudan-university-world-alumni-conference-invitation/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "a[href=\"http://www.fudan.us\"]"
+    ],
+    "unwrap": [
+      "a[href=\"../wp-content/uploads/2011/01/12thWorldAlumni_FDAANCSponsorship_en.pdf\"]"
+    ],
     "edited": null
   },
   "/2011/02/20/fudan-12th-world-alumni-conference/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "a[href=\"http://www.fudan.us\"]"
+    ],
+    "unwrap": [
+      "a[href=\"../../../../wp-content/uploads/2011/01/12thWorldAlumni_Registration.doc\"]",
+      "a[href=\"../../../../wp-content/uploads/2011/01/12thWorldAlumni_FDAANCSponsorship.doc\"]"
+    ],
     "edited": null
   },
   "/2011/02/19/night-of-shanghai-2011/": {
-    "remove": [],
+    "remove": [
+      "p:has(> a[href=\"http://sjtu-sv.com/nightofshanghai2011.html\"])"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2011/02/01/meeting-with-executive-team-of-shanghai-fudan-microelectronics-group-co-ltd/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://fdaanc.eventbrite.com/\"]"
+    ],
     "edited": null
   },
   "/2010/10/14/2010-winter-zhongguancun/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://www.ziyuhotel.cn/\"]",
+      "a[href=\"../../../../wp-content/uploads/2010/10/附件二：12月创业人才中关村考察团汇总表.xls\"]"
+    ],
     "edited": null
   },
   "/2010/10/09/current-fudan-students-look-for-career-advice/": {
@@ -245,7 +419,9 @@
     "edited": null
   },
   "/2010/09/22/fudan-business-club-monthly-meeting-september-2010/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"http://fudanbiz092010.eventbrite.com/\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
@@ -255,22 +431,37 @@
     "edited": null
   },
   "/2010/09/09/fudan-alumni-association-opening-ceremony-shanghai/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"http://2009.fudan.org.cn\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
   "/2010/08/26/repair-fudan-xianghui-hall/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "a[href=\"http://baike.baidu.com/view/2497464.htm\"]",
+      "a[href=\"http://www.fuedf.org/Xianghuitang/Introduce.aspx\"]",
+      "a[href=\"http://www.fuedf.org/xianghuitang\"]",
+      "a[href=\"http://www.fuedf.org/xianghuitang/GiveOnline.aspx\"]",
+      "a[href=\"http://www.fuedf.org/xianghuitang/SeatIntro.aspx\"]"
+    ],
+    "unwrap": [
+      "a[href=\"http://us.mc805.mail.yahoo.com/mc/compose?to=youwenyi%40yahoo.com\"]",
+      "a[href=\"http://us.mc805.mail.yahoo.com/mc/compose?to=fudanedf%40fudan.edu.cn\"]"
+    ],
     "edited": null
   },
   "/2010/08/22/2010-summer-alumni-bbq/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://\"]"
+    ],
     "edited": null
   },
   "/2010/06/02/fudan-delegation-in-the-bay-area-june-2010/": {
-    "remove": [],
+    "remove": [
+      "a[href=\"http://fdaanc062010.eventbrite.com/\"]"
+    ],
     "unwrap": [],
     "edited": null
   },
@@ -280,8 +471,14 @@
     "edited": null
   },
   "/2010/03/05/longfeifei-youth-summer-camp-fdfz-2010-shanghai/": {
-    "remove": [],
-    "unwrap": [],
+    "remove": [
+      "a[href=\"http://www.longfeifei.com/index-en.shtml\"]"
+    ],
+    "unwrap": [
+      "a[href=\"http://www.fdfzalumni.org/\"]",
+      "a[href=\"http://www.fdfzxy.org/fund/index.php\"]",
+      "a[href=\"http://www.fdfzalumni.org/\"]"
+    ],
     "edited": null
   },
   "/2009/11/09/repair-xianghui-hal/": {
@@ -296,12 +493,16 @@
   },
   "/2009/08/17/2009-alumni-summer-bbq/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://www.evite.com/pages/invite/viewInvite.jsp?inviteId=QCIMYTFZMGBJKPSAOAAR&li=iq&src=email.\"]"
+    ],
     "edited": null
   },
   "/2009/07/24/仲夏在复旦-龙飞飞少年夏令营-2009/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href=\"http://www.longfeifei.com/daily/daily.shtml\"]"
+    ],
     "edited": null
   },
   "/2009/04/29/how-admission-decisions-are-made-in-selective-colleges/": {
@@ -310,7 +511,9 @@
     "edited": null
   },
   "/2006/02/16/night-of-shanghai-2006/": {
-    "remove": [],
+    "remove": [
+      "p:has(> a > img[src=\"../../../../wp-content/uploads/2010/10/leader23.jpg\"])"
+    ],
     "unwrap": [],
     "edited": null
   },

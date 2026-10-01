@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import * as cheerio from "cheerio";
 import { stripMalware, renameWp, markMore, frontMatter, sameDayOrder } from "./extract.mjs";
-import { processMedia } from "./media.mjs";
+import { processMedia, report, saveCache } from "./media.mjs";
+import { applyEdits } from "./edits.mjs";
 
 const OLD = path.resolve("../fdaanc-old");
 const OUT = "content/posts";
@@ -42,4 +43,7 @@ for (const { path: p, date } of posts) {
   fs.writeFileSync(path.join(dir, "index.html"), frontMatter({ title, date: dates.get(p) }) + body);
 }
 fs.writeFileSync("scripts/migrate/ops.json", JSON.stringify(ops, null, 2));
+saveCache();
+fs.writeFileSync("scripts/migrate/report.md", `# Migration report\n\n${report.join("\n")}\n`);
+applyEdits();
 console.log(`migrated ${posts.length} posts`);

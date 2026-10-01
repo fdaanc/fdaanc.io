@@ -1,0 +1,72 @@
+# Migration report
+
+- /2019/12/09/复旦大学北加州校友会2020年理事会换届招新通知/: removed 0, unwrapped 1
+- /2018/08/22/test/: uncertain https://www.zillow.com/profile/Holly-Fang/
+- /2018/08/22/test/: removed 3, unwrapped 0
+- /2018/01/21/2018上海之夜：上海老咪道-湾区上海高校美/: removed 2, unwrapped 5
+- /2017/11/28/复旦大学北加州校友会理事会换届招新通知/: removed 1, unwrapped 0
+- /2017/06/26/浦江之夏欢迎你-2017-湾区上海高校联盟bbq/: removed 0, unwrapped 4
+- /2017/01/14/2017上海之夜-湾区上海高校新春联欢开始注册啦/: uncertain http://www.knottr.com
+- /2017/01/14/2017上海之夜-湾区上海高校新春联欢开始注册啦/: removed 1, unwrapped 2
+- /2016/08/01/2015浦江之夏-上海七大高校联合夏季烧烤转载/: removed 4, unwrapped 2
+- /2016/02/03/2016-上海之夜3月6日在fremont盛大举行/: removed 0, unwrapped 2
+- /2015/10/15/2015-fdaanc-board-election-notice/: removed 0, unwrapped 1
+- /2015/07/23/2015浦江之夏-上海七大高校联合夏季烧烤/: removed 0, unwrapped 3
+- /2015/03/01/上海之夜三月八日在东湾酒庄登场/: removed 1, unwrapped 0
+- /2014/07/20/2014-浦江之夏-上海七大高校联合夏季烧烤/: uncertain https://lh6.googleusercontent.com/-2ypXCiV3Bhk/U-_wnq5h2vE/AAAAAAAACpw/RzDk3l0OlNc/s160-c/Shanghai_bbq_2014.jpg
+- /2014/07/20/2014-浦江之夏-上海七大高校联合夏季烧烤/: removed 1, unwrapped 3
+- /2014/06/11/健康講座-（有关中医保健，转基因食物，抗癌药物/: removed 1, unwrapped 0
+- /2014/05/15/高新区发展和招才引智的回顾和展望交流会/: removed 1, unwrapped 0
+- /2014/02/12/2014-上海之夜视频/: removed 1, unwrapped 3
+  - **needs manual edit** near: "集锦："
+- /2014/01/17/2014-night-of-shanghai-open-for-registration/: removed 0, unwrapped 3
+- /2013/10/14/fdaanc-board-election-for-2014-2015/: removed 1, unwrapped 0
+- /2013/07/10/2013-浦江之夏-上海六大高校联合夏季烧烤/: uncertain https://lh3.googleusercontent.com/-_nZ1rmx2Bj4/UhlkOawB2BE/AAAAAAAACGQ/jGQIyEshFQw/s160-c/Shanghai_bbq_2013.jpg
+- /2013/07/10/2013-浦江之夏-上海六大高校联合夏季烧烤/: removed 1, unwrapped 4
+- /2013/03/14/关于向校友尹榆家人捐款的倡议书/: removed 3, unwrapped 0
+- /2013/02/25/有关2013-上海之夜-的报道，照片和视频/: uncertain https://lh3.googleusercontent.com/-gdVgb3bMlbQ/USm8wEFKrlE/AAAAAAAAB74/GWj03NAMa3k/s160-c/2013_02_23.jpg
+- /2013/02/25/有关2013-上海之夜-的报道，照片和视频/: removed 1, unwrapped 7
+- /2013/01/15/night-of-shanghai-2013-上海之夜/: removed 4, unwrapped 3
+- /2012/10/28/衷心祝贺复旦队获得东方明珠杯第三名！/: uncertain https://lh4.googleusercontent.com/-su-37W5YXzI/UI4EtgT4tZE/AAAAAAAAB1Y/RdwhEKa3GI0/s160-c/East_pearl_ping_pong_2012.jpg
+- /2012/10/28/衷心祝贺复旦队获得东方明珠杯第三名！/: removed 3, unwrapped 1
+- /2012/07/08/2012-shanghai-alumni-summer-bbq-open-for-registration/: uncertain https://lh6.googleusercontent.com/-w-gpPgx83iM/UDr09ltSEXE/AAAAAAAABs8/L3DsHDFj5SU/s160-c/Shanghai_bbq_2012.jpg
+- /2012/07/08/2012-shanghai-alumni-summer-bbq-open-for-registration/: uncertain https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=D5RYMXVD6BNMC
+- /2012/07/08/2012-shanghai-alumni-summer-bbq-open-for-registration/: uncertain https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=CZ46ZS9W3FQ38
+- /2012/07/08/2012-shanghai-alumni-summer-bbq-open-for-registration/: removed 1, unwrapped 7
+- /2012/07/07/cina-and-fudan-joint-event-finding-your-way-to-successful-entrepreneurship/: uncertain https://lh4.googleusercontent.com/-y9gHRfUB-9s/UBTrogfOgiE/AAAAAAAABgQ/HLc5q1g0ILc/s160-c/Find_your_way_072612.jpg
+- /2012/07/07/cina-and-fudan-joint-event-finding-your-way-to-successful-entrepreneurship/: uncertain http://www.cina.org/
+- /2012/07/07/cina-and-fudan-joint-event-finding-your-way-to-successful-entrepreneurship/: removed 2, unwrapped 1
+- /2012/05/06/cina-and-fudan-joint-event-essential-elements-for-successfully-launching-a-new-venture/: uncertain https://lh6.googleusercontent.com/-EnZxeQ0fG10/T8WyTu3fWWE/AAAAAAAABdI/tUiYv-SG1vQ/s160-c/Element_for_venture_052912.jpg
+- /2012/05/06/cina-and-fudan-joint-event-essential-elements-for-successfully-launching-a-new-venture/: uncertain http://www.cina.org/
+- /2012/05/06/cina-and-fudan-joint-event-essential-elements-for-successfully-launching-a-new-venture/: removed 2, unwrapped 1
+- /2012/05/03/周末讲座-硅谷房地产的走势，投资，资产保护和保/: uncertain https://lh5.googleusercontent.com/-BIuyKeJyvMo/T6Nb9cZd90E/AAAAAAAABaA/TS2uw3GUUVE/s160-c/2012_03_10.jpg
+- /2012/05/03/周末讲座-硅谷房地产的走势，投资，资产保护和保/: removed 1, unwrapped 1
+- /2012/02/11/night-of-shanghai-2012-recaptured-in-picture/: uncertain https://lh5.googleusercontent.com/-Y14X8PwtUGc/Ty9sL03rbOE/AAAAAAAABas/odF5gGiii68/s160-c/Nos_2012_calligraphy_show.jpg
+- /2012/02/11/night-of-shanghai-2012-recaptured-in-picture/: removed 10, unwrapped 1
+  - **needs manual edit** near: "Thanks everyone, and a special thank you for Lu Bin who took this great photo be"
+- /2012/02/11/choir-championship-again/: removed 1, unwrapped 0
+- /2012/01/09/night-of-shanghai-2012/: removed 1, unwrapped 1
+- /2011/09/29/2012-fdaanc-board-member-nomination-and-election/: removed 1, unwrapped 0
+- /2011/09/13/中国海外人才招聘会/: removed 1, unwrapped 2
+- /2011/08/22/summer-of-pujiang-bbq-2011/: removed 1, unwrapped 0
+- /2011/03/16/world-alumni-conference-update/: removed 1, unwrapped 0
+- /2011/02/20/the-12th-fudan-university-world-alumni-conference-invitation/: removed 1, unwrapped 1
+  - **needs manual edit** near: "Registration and more details:"
+- /2011/02/20/fudan-12th-world-alumni-conference/: removed 1, unwrapped 2
+- /2011/02/19/night-of-shanghai-2011/: removed 1, unwrapped 0
+- /2011/02/01/meeting-with-executive-team-of-shanghai-fudan-microelectronics-group-co-ltd/: removed 0, unwrapped 1
+- /2010/10/14/2010-winter-zhongguancun/: removed 0, unwrapped 2
+- /2010/09/22/fudan-business-club-monthly-meeting-september-2010/: removed 1, unwrapped 0
+- /2010/09/09/application-for-the-11th-fudan-university-global-alumni-conventionappli/: uncertain http://www.ahfudanren.cn/News_Show.Asp?Classid=12&amp;id=267
+- /2010/09/09/fudan-alumni-association-opening-ceremony-shanghai/: removed 1, unwrapped 0
+- /2010/08/26/repair-fudan-xianghui-hall/: removed 5, unwrapped 2
+- /2010/08/22/2010-summer-alumni-bbq/: removed 0, unwrapped 1
+- /2010/06/02/fudan-delegation-in-the-bay-area-june-2010/: removed 1, unwrapped 0
+- /2010/03/05/longfeifei-youth-summer-camp-fdfz-2010-shanghai/: uncertain http://www.longfeifei.com/
+- /2010/03/05/longfeifei-youth-summer-camp-fdfz-2010-shanghai/: uncertain http://www.longfeifei.com/
+- /2010/03/05/longfeifei-youth-summer-camp-fdfz-2010-shanghai/: uncertain http://www.longfeifei.com/
+- /2010/03/05/longfeifei-youth-summer-camp-fdfz-2010-shanghai/: uncertain http://longfeifei.com/aboutus/http%7C/www.fdfzxy.org/fund/index.php
+- /2010/03/05/longfeifei-youth-summer-camp-fdfz-2010-shanghai/: removed 1, unwrapped 3
+- /2009/08/17/2009-alumni-summer-bbq/: removed 0, unwrapped 1
+- /2009/07/24/仲夏在复旦-龙飞飞少年夏令营-2009/: removed 0, unwrapped 1
+- /2006/02/16/night-of-shanghai-2006/: removed 1, unwrapped 0
