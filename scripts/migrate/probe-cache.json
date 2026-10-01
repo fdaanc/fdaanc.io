@@ -126,5 +126,7 @@
   "http://longfeifei.com/aboutus/http%7C/www.fdfzxy.org/fund/index.php": "uncertain",
   "http://www.longfeifei.com/index-en.shtml": "dead",
   "http://www.evite.com/pages/invite/viewInvite.jsp?inviteId=QCIMYTFZMGBJKPSAOAAR&amp;li=iq&amp;src=email.": "dead",
-  "http://www.longfeifei.com/daily/daily.shtml": "dead"
+  "http://www.longfeifei.com/daily/daily.shtml": "dead",
+  "https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif": "live",
+  "https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif": "live"
 }

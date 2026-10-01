@@ -88,7 +88,7 @@
   },
   "/2017/01/14/2017上海之夜-湾区上海高校新春联欢开始注册啦/": {
     "remove": [
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2017/01/shanghai-300x164.png\"])"
+      "p:has(> a > img[src$=\"wp-content/uploads/2017/01/shanghai-300x164.png\"])"
     ],
     "unwrap": [
       "a[href=\"http://www.gracegu.com/\"]",
@@ -240,7 +240,7 @@
   },
   "/2013/01/15/night-of-shanghai-2013-上海之夜/": {
     "remove": [
-      "h2:has(> a > img[src=\"../../../../wp-content/uploads/2013/01/shanghai_night.jpg\"])",
+      "h2:has(> a > img[src$=\"wp-content/uploads/2013/01/shanghai_night.jpg\"])",
       "a[href=\"http://www.gingerloan.com\"]",
       "a[href=\"http://www.gracegu.com\"]",
       "a[href=\"http://www.farmersagent.com/lzhao\"]"
@@ -309,15 +309,15 @@
   },
   "/2012/02/11/night-of-shanghai-2012-recaptured-in-picture/": {
     "remove": [
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4699.jpg\"])",
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_46291.jpg\"])",
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4631.jpg\"])",
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4633.jpg\"])",
-      "a:has(> img[src=\"../../../../wp-content/uploads/2012/02/IMG_4672.jpg\"])",
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4654.jpg\"])",
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_46381.jpg\"])",
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/最近更新.jpg\"])",
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2012/02/IMG_4711.jpg\"])",
+      "p:has(> a > img[src$=\"wp-content/uploads/2012/02/IMG_4699.jpg\"])",
+      "p:has(> a > img[src$=\"wp-content/uploads/2012/02/IMG_46291.jpg\"])",
+      "p:has(> a > img[src$=\"wp-content/uploads/2012/02/IMG_4631.jpg\"])",
+      "p:has(> a > img[src$=\"wp-content/uploads/2012/02/IMG_4633.jpg\"])",
+      "a:has(> img[src$=\"wp-content/uploads/2012/02/IMG_4672.jpg\"])",
+      "p:has(> a > img[src$=\"wp-content/uploads/2012/02/IMG_4654.jpg\"])",
+      "p:has(> a > img[src$=\"wp-content/uploads/2012/02/IMG_46381.jpg\"])",
+      "p:has(> a > img[src$=\"wp-content/uploads/2012/02/最近更新.jpg\"])",
+      "p:has(> a > img[src$=\"wp-content/uploads/2012/02/IMG_4711.jpg\"])",
       "tr:has(> td > a[href=\"https://picasaweb.google.com/youwenyi/Nos_2012_calligraphy_show?authuser=0&authkey=Gv1sRgCNrrnp7v54XkPQ&feat=embedwebsite\"] > img)"
     ],
     "unwrap": [
@@ -334,7 +334,7 @@
   },
   "/2012/01/09/night-of-shanghai-2012/": {
     "remove": [
-      "p:has(> img[src=\"../../../../wp-content/uploads/2012/01/nos2012.jpg\"])"
+      "p:has(> img[src$=\"wp-content/uploads/2012/01/nos2012.jpg\"])"
     ],
     "unwrap": [
       "a[href=\"http://www.99people.com/\"]"
@@ -350,11 +350,11 @@
   },
   "/2011/09/13/中国海外人才招聘会/": {
     "remove": [
-      "a:empty[href=\"../../../../wp-content/uploads/2011/09/2011中国海外人才招聘大会_Brochure.pdf\"]"
+      "a:empty[href$=\"wp-content/uploads/2011/09/2011中国海外人才招聘大会_Brochure.pdf\"]"
     ],
     "unwrap": [
-      "a[href=\"../../../../wp-content/uploads/2011/09/2011中国海外人才招聘大会.doc\"]",
-      "a[href=\"../../../../wp-content/uploads/2011/09/2011中国海外人才招聘大会_Brochure.pdf\"]"
+      "a[href$=\"wp-content/uploads/2011/09/2011中国海外人才招聘大会.doc\"]",
+      "a[href$=\"wp-content/uploads/2011/09/2011中国海外人才招聘大会_Brochure.pdf\"]"
     ],
     "edited": null
   },
@@ -377,7 +377,7 @@
       "a[href=\"http://www.fudan.us\"]"
     ],
     "unwrap": [
-      "a[href=\"../wp-content/uploads/2011/01/12thWorldAlumni_FDAANCSponsorship_en.pdf\"]"
+      "a[href$=\"wp-content/uploads/2011/01/12thWorldAlumni_FDAANCSponsorship_en.pdf\"]"
     ],
     "edited": null
   },
@@ -386,8 +386,8 @@
       "a[href=\"http://www.fudan.us\"]"
     ],
     "unwrap": [
-      "a[href=\"../../../../wp-content/uploads/2011/01/12thWorldAlumni_Registration.doc\"]",
-      "a[href=\"../../../../wp-content/uploads/2011/01/12thWorldAlumni_FDAANCSponsorship.doc\"]"
+      "a[href$=\"wp-content/uploads/2011/01/12thWorldAlumni_Registration.doc\"]",
+      "a[href$=\"wp-content/uploads/2011/01/12thWorldAlumni_FDAANCSponsorship.doc\"]"
     ],
     "edited": null
   },
@@ -409,7 +409,7 @@
     "remove": [],
     "unwrap": [
       "a[href=\"http://www.ziyuhotel.cn/\"]",
-      "a[href=\"../../../../wp-content/uploads/2010/10/附件二：12月创业人才中关村考察团汇总表.xls\"]"
+      "a[href$=\"wp-content/uploads/2010/10/附件二：12月创业人才中关村考察团汇总表.xls\"]"
     ],
     "edited": null
   },
@@ -512,7 +512,7 @@
   },
   "/2006/02/16/night-of-shanghai-2006/": {
     "remove": [
-      "p:has(> a > img[src=\"../../../../wp-content/uploads/2010/10/leader23.jpg\"])"
+      "p:has(> a > img[src$=\"wp-content/uploads/2010/10/leader23.jpg\"])"
     ],
     "unwrap": [],
     "edited": null

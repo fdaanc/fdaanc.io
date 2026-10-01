@@ -5,6 +5,10 @@ import { execFileSync } from "node:child_process";
 const CACHE = "scripts/migrate/probe-cache.json";
 const cache = fs.existsSync(CACHE) ? JSON.parse(fs.readFileSync(CACHE, "utf8")) : {};
 export const report = [];
+// original absolute URL (as it appears in the old HTML) -> repo-relative localized file path,
+// for every hotlinked image downloaded. Consumed by the verify harness to route old-side
+// requests to the local copy instead of the live host.
+export const localized = {};
 export const saveCache = () => fs.writeFileSync(CACHE, JSON.stringify(cache, null, 2));
 
 const UPLOAD = /^(?:(?:\.\.\/)+|https?:\/\/(?:www\.)?fdaanc\.org\/)wp-content\/uploads\/(.+?)(?:\?.*)?$/;
@@ -18,6 +22,16 @@ const decodeEntities = (v) => v
   .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
   .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&nbsp;/g, " ");
 const esc = (v) => decodeEntities(v).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+// A relative own-site path's leading "../" count depends on the URL depth of the page it's
+// embedded on (a post page sits 4 levels deep; the same post's block on a listing page only 2),
+// so a selector recorded from the post page's copy of an attribute must match by the
+// depth-independent tail (a suffix selector), not the exact string -- otherwise it silently
+// fails to match when replayed against a listing page and the element it should remove lingers.
+// Absolute URLs have no such variance, so they still get an exact match.
+const attrSelector = (attr, rawValue) => {
+  const v = rawValue ?? "";
+  return /^(?:\.\.\/)+/.test(v) ? `[${attr}$="${esc(v.replace(/^(?:\.\.\/)+/, ""))}"]` : `[${attr}="${esc(v)}"]`;
+};
 
 // Synchronous probe via a child process keeps processMedia synchronous and cheerio-friendly.
 // gtimeout is belt-and-suspenders: a DNS lookup on this sandboxed network can hang well past
@@ -68,7 +82,7 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
       top = parent; chain.unshift(parent[0]);
     }
     const leaf = chain.at(-1), attr = leaf.attribs.src ? "src" : leaf.attribs.href ? "href" : "data";
-    const attrVal = `[${attr}="${esc(leaf.attribs[attr] ?? "")}"]`;
+    const attrVal = attrSelector(attr, leaf.attribs[attr]);
     // A removed <a> with no text (its only content was the dead/missing media, or nothing at
     // all) can share its href with an unrelated sibling link that has real text — e.g. a
     // Picasa embed's thumbnail link and caption link, or a stray empty <a> duplicating a real
@@ -118,6 +132,7 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
           const name = path.basename(new URL(value).pathname) || "image.jpg";
           copied.set(value, copyInto(dir, tmp, name)); fs.rmSync(tmp);
         }
+        localized[value] = path.join(dir, copied.get(value));
         return { local: copied.get(value) };
       }
     }
@@ -131,18 +146,20 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
   root.find('embed[type="application/x-shockwave-flash"]').each((_, el) => removeWithEmptyAncestors(el));
   root.find('iframe[src^="http://www.youtube.com"]').each((_, el) => { el.attribs.src = el.attribs.src.replace(/^http:/, "https:"); });
 
-  for (const [sel, attr] of [["img[src]", "src"], ["source[src]", "src"], ["object[data]", "data"], ["a[href]", "href"]]) {
+  // A PayPal "Buy Now"/"Add to Cart" button renders as <input type="image">, not <img> --
+  // still a hotlinked image needing the same localize-or-remove treatment as any other.
+  for (const [sel, attr] of [["img[src]", "src"], ["input[type=\"image\"][src]", "src"], ["source[src]", "src"], ["object[data]", "data"], ["a[href]", "href"]]) {
     root.find(sel).each((_, el) => {
       if (!el.parent) return; // already removed with an ancestor
       const value = el.attribs[attr];
-      const r = resolve(value, el.name === "img");
+      const r = resolve(value, el.name === "img" || el.name === "input");
       if (r.local) el.attribs[attr] = r.local;
       else if (r.rewrite) el.attribs[attr] = r.rewrite;
       else if (r.missing) {
         if (el.name === "a") {
           const text = $(el).text().trim();
           if (!text || text === value || value.endsWith(text)) removeWithEmptyAncestors(el, { alwaysReport: true });
-          else { ops.unwrap.push(`a[href="${esc(value)}"]`); $(el).replaceWith($(el).contents()); }
+          else { ops.unwrap.push(`a${attrSelector("href", value)}`); $(el).replaceWith($(el).contents()); }
         } else if (el.name === "source") removeWithEmptyAncestors($(el).closest("audio")[0] ?? el);
         else removeWithEmptyAncestors(el);
       }

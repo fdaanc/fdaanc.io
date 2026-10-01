@@ -20,7 +20,7 @@ test("missing image inside link inside paragraph removes all three", () => {
   const ctx = setup('<p>Before</p><p><a href="../../wp-content/uploads/2012/02/IMG_1.jpg"><img src="../../wp-content/uploads/2012/02/IMG_1.jpg"></a></p><p>After</p>');
   const ops = processMedia(ctx);
   assert.equal(ctx.root.html(), "<p>Before</p><p>After</p>");
-  assert.deepEqual(ops.remove, ['p:has(> a > img[src="../../wp-content/uploads/2012/02/IMG_1.jpg"])']);
+  assert.deepEqual(ops.remove, ['p:has(> a > img[src$="wp-content/uploads/2012/02/IMG_1.jpg"])']);
 });
 
 test("existing upload is copied next to the post and linked by filename", () => {
@@ -34,7 +34,7 @@ test("link to a missing upload keeps its text", () => {
   const ctx = setup('<p>See <a href="../wp-content/uploads/2013/03/lyrics.pdf">lyrics</a>.</p>');
   const ops = processMedia(ctx);
   assert.equal(ctx.root.html(), "<p>See lyrics.</p>");
-  assert.deepEqual(ops.unwrap, ['a[href="../wp-content/uploads/2013/03/lyrics.pdf"]']);
+  assert.deepEqual(ops.unwrap, ['a[href$="wp-content/uploads/2013/03/lyrics.pdf"]']);
 });
 
 test("flash embed removed, youtube upgraded to https, smiley becomes text", () => {
@@ -48,7 +48,7 @@ test("flash embed removed, youtube upgraded to https, smiley becomes text", () =
 test("recorded selector decodes HTML entities so it matches the live old DOM", () => {
   const ctx = setup('<p><img src="../../wp-content/uploads/2012/02/IMG_1.jpg?a=1&#038;b=2"></p>');
   const ops = processMedia(ctx);
-  assert.deepEqual(ops.remove, ['p:has(> img[src="../../wp-content/uploads/2012/02/IMG_1.jpg?a=1&b=2"])']);
+  assert.deepEqual(ops.remove, ['p:has(> img[src$="wp-content/uploads/2012/02/IMG_1.jpg?a=1&b=2"])']);
 });
 
 // A Picasa-style embed often links both its thumbnail and its caption text to the same
@@ -60,8 +60,8 @@ test("a missing link wrapping an image is removed without matching a same-href t
     '<tr><td><a href="../wp-content/uploads/2026/08/missing.jpg">caption text</a></td></tr></table>'
   );
   const ops = processMedia(ctx);
-  assert.deepEqual(ops.remove, ['tr:has(> td > a[href="../wp-content/uploads/2026/08/missing.jpg"] > img)']);
-  assert.deepEqual(ops.unwrap, ['a[href="../wp-content/uploads/2026/08/missing.jpg"]']);
+  assert.deepEqual(ops.remove, ['tr:has(> td > a[href$="wp-content/uploads/2026/08/missing.jpg"] > img)']);
+  assert.deepEqual(ops.unwrap, ['a[href$="wp-content/uploads/2026/08/missing.jpg"]']);
   assert.ok(ctx.root.html().includes("caption text") && !ctx.root.html().includes("<a "));
 });
 
@@ -70,7 +70,7 @@ test("a missing link wrapping an image, with no further ancestor to collapse, st
     '<p>keep me</p><a href="../wp-content/uploads/2026/08/missing.jpg"><img src="../../wp-content/uploads/2026/08/a.pdf"></a><p>and me</p>'
   );
   const ops = processMedia(ctx);
-  assert.deepEqual(ops.remove, ['a:has(img)[href="../wp-content/uploads/2026/08/missing.jpg"]']);
+  assert.deepEqual(ops.remove, ['a:has(img)[href$="wp-content/uploads/2026/08/missing.jpg"]']);
   assert.equal(ctx.root.html(), "<p>keep me</p><p>and me</p>");
 });
 
@@ -83,8 +83,8 @@ test("an empty link is removed without matching a same-href link that has text",
     '<p><a href="../wp-content/uploads/2011/09/missing.pdf">missing_Brochure</a></p>'
   );
   const ops = processMedia(ctx);
-  assert.deepEqual(ops.remove, ['a:empty[href="../wp-content/uploads/2011/09/missing.pdf"]']);
-  assert.deepEqual(ops.unwrap, ['a[href="../wp-content/uploads/2011/09/missing.pdf"]']);
+  assert.deepEqual(ops.remove, ['a:empty[href$="wp-content/uploads/2011/09/missing.pdf"]']);
+  assert.deepEqual(ops.unwrap, ['a[href$="wp-content/uploads/2011/09/missing.pdf"]']);
   assert.equal(ctx.root.html(), '<p><a href="2011中国海外人才招聘大会.doc">name</a></p><p>missing_Brochure</p>');
 });
 

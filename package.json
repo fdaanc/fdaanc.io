@@ -7,7 +7,8 @@
     "build": "eleventy",
     "test": "node --test 'lib/*.test.js'",
     "check": "node scripts/check.mjs",
-    "verify": "node scripts/verify/visual.mjs"
+    "verify": "node scripts/verify/visual.mjs",
+    "verify:selftest": "node scripts/verify/selftest.mjs"
   },
   "engines": {
     "node": ">=20"
