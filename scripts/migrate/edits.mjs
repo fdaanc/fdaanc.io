@@ -3,7 +3,7 @@ import fs from "node:fs";
 // Each entry's `find` must match exactly once; applied after migrate.mjs regenerates
 // content/posts/, so these are minimal, re-runnable fixes for sentences that only made
 // sense next to media removed by processMedia() (see scripts/migrate/report.md).
-const edits = [
+export const edits = [
   {
     // "Highlights:" introduced a youtu.be link whose text was the bare URL, removed per rule 6.
     file: "content/posts/2014-02-12-2014-上海之夜视频/index.html",

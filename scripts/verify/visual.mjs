@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalize, FREEZE_CSS } from "./normalize.js";
+import { edits as contentEdits } from "../migrate/edits.mjs";
 
 export const OLD = "http://localhost:8001", NEW = "http://localhost:8002";
 export const WIDTHS = [1280, 390];
@@ -91,7 +92,8 @@ export async function settle(page, extraCss = "") {
 export async function shot(page, url, opts = {}) {
   const { old, postOps, selector, extraCss, isolate, mutate, mutateArg } = opts;
   await page.goto(url, { waitUntil: "load", timeout: 60000 });
-  if (old) await page.evaluate(normalize, postOps ?? {});
+  let editResults = [];
+  if (old) editResults = await page.evaluate(normalize, postOps ?? {});
   if (mutate) await page.evaluate(mutate, mutateArg);
   if (isolate) await page.evaluate(isolateBlocks, isolate);
   await settle(page, extraCss);
@@ -100,8 +102,13 @@ export async function shot(page, url, opts = {}) {
   else if (selector) png = await page.locator(selector).first().screenshot();
   else png = await page.screenshot({ fullPage: true });
   const text = await page.evaluate((s) => (document.querySelector(s ?? "article.content")?.innerText ?? "").replace(/\s+/g, " ").trim(), selector);
-  return { png: PNG.sync.read(png), text };
+  return { png: PNG.sync.read(png), text, editResults };
 }
+
+// A row only stays excepted when normalize() couldn't apply one of its post's edits.mjs fixes
+// to the old side (see normalize.js) -- everything else must match the new site at 0 diff.
+export const isExceptionUnverifiable = (editResults) =>
+  (editResults ?? []).some((e) => e.status === "ambiguous" || e.status === "unverifiable");
 
 export function compare(a, b, out) {
   if (a.width !== b.width || a.height !== b.height) return { diff: -1, size: `${a.width}x${a.height} vs ${b.width}x${b.height}` };
@@ -139,6 +146,21 @@ async function main() {
   const exceptions = JSON.parse(fs.readFileSync("scripts/verify/exceptions.json", "utf8"));
   const localized = JSON.parse(fs.readFileSync("scripts/migrate/localized.json", "utf8"));
   const merged = mergeLocalized(localized);
+
+  // scripts/migrate/edits.mjs's `file` is the migrated post's own dir (content/posts/<post dir>/
+  // index.html); invert ops.json's URL keys (built the same way by migrate.mjs) to recover the
+  // post URL each edit belongs to, so the old-side normalize() can be handed that post's edits.
+  const dirToUrl = Object.fromEntries(Object.keys(ops).map((p) => {
+    const [, y, m, d, slug] = p.split("/");
+    return [`content/posts/${y}-${m}-${d}-${slug}`, p];
+  }));
+  const editsByUrl = {};
+  for (const e of contentEdits) {
+    const dir = e.file.replace(/\/index\.html$/, "");
+    const url = dirToUrl[dir];
+    if (!url) throw new Error(`edits.mjs file "${e.file}" doesn't match any post in ops.json`);
+    (editsByUrl[url] ??= []).push({ find: e.find, replace: e.replace });
+  }
   const googleFontsCss = fs.readFileSync("assets/css/fonts.css", "utf8").replace(/url\(\.\.\/fonts\//g, "url(http://localhost:8002/assets/fonts/");
   const argv = process.argv;
   const only = argv.includes("--only") ? argv[argv.indexOf("--only") + 1] : null;
@@ -148,14 +170,15 @@ async function main() {
   function jobs(oldListing, newListing) {
     const list = [];
     for (const p of Object.keys(ops)) {
-      list.push({ name: `post${p}`, oldUrl: OLD + p, newUrl: NEW + encodeURI(p), postOps: ops[p] });
+      const postEdits = editsByUrl[p];
+      list.push({ name: `post${p}`, oldUrl: OLD + p, newUrl: NEW + encodeURI(p), postOps: { ...ops[p], edits: postEdits, editSelector: "article.content" } });
       // A post listed on the old site's bare "/" (home, depth 0) gets a root-relative href with
       // no leading "/" or "../" at all (e.g. "2026/08/17/x/"), so it never matches a suffix
       // pattern built from p's own leading "/" -- match both the absolute and relative forms.
       const rel = p.slice(1);
       const sel = [p, rel].flatMap((v) => [encodeURI(v).toLowerCase(), v])
         .map((v) => `section.latest-post:has(.latest-post-title a[href$="${v}"])`).join(", ");
-      list.push({ name: `list${p}`, oldUrl: OLD + oldListing[p], newUrl: NEW + newListing[p], selector: sel, postOps: ops[p], isolate: { keep: sel, dropFooter: true, clipSelector: sel } });
+      list.push({ name: `list${p}`, oldUrl: OLD + oldListing[p], newUrl: NEW + newListing[p], selector: sel, postOps: { ...ops[p], edits: postEdits, editSelector: sel }, isolate: { keep: sel, dropFooter: true, clipSelector: sel } });
     }
     list.push({ name: "chrome-home", oldUrl: OLD + "/", newUrl: NEW + "/", selector: "body", chromeOnly: true });
     for (const n of [1, 2, 8, 15]) {
@@ -195,17 +218,21 @@ async function main() {
       // page height while posts don't exist on the new side yet (Task 1's placeholder).
       const chromeCss = j.chromeOnly ? "article.content { display: none !important; }" : "";
       const run = (url, old) => shot(page, url, { old, postOps: j.postOps, selector: j.selector, extraCss: chromeCss, isolate: j.isolate });
-      const excepted = Boolean(exceptions[j.name.replace(/^(post|list)/, "")]);
+      // exceptions.json no longer blankets a row by post identity -- it only still applies when
+      // normalize() couldn't apply one of that post's edits.mjs fixes to the old side (ambiguous
+      // or serialization-mismatched), so the mismatch it describes genuinely can't be verified.
       try {
         let a = await run(j.oldUrl, true), b = await run(j.newUrl, false);
         let r = compare(a.png, b.png, `verify-out/${width}/${j.name.replace(/\//g, "_")}.png`);
         if (r.diff !== 0) { a = await run(j.oldUrl, true); b = await run(j.newUrl, false); r = compare(a.png, b.png, `verify-out/${width}/${j.name.replace(/\//g, "_")}.png`); } // one retry for network flake
         const textOk = j.chromeOnly || j.name.startsWith("pagination") || a.text === b.text;
-        return { width, name: j.name, ...r, textOk, excepted };
+        const exceptionUnverifiable = isExceptionUnverifiable(a.editResults);
+        const exceptionReason = exceptionUnverifiable ? exceptions[j.name.replace(/^(post|list)/, "")] : undefined;
+        return { width, name: j.name, ...r, textOk, excepted: exceptionUnverifiable, exceptionUnverifiable, exceptionReason };
       } catch (e) {
         // Any per-job failure (navigation timeout, a selector that matches nothing) is recorded
         // as a failure, never silently skipped -- the run continues to the next job.
-        return { width, name: j.name, diff: -1, error: e.message.split("\n")[0], textOk: false, excepted };
+        return { width, name: j.name, diff: -1, error: e.message.split("\n")[0], textOk: false, excepted: false };
       }
     });
     results.push(...jobResults);
@@ -227,8 +254,13 @@ async function main() {
   fs.mkdirSync("verify-out", { recursive: true });
   fs.writeFileSync("verify-out/summary.json", JSON.stringify(results, null, 2));
   const bad = results.filter((r) => (r.diff !== 0 || !r.textOk) && !r.excepted);
+  const unverifiable = results.filter((r) => r.exceptionUnverifiable);
   console.table(results.filter((r) => r.diff !== 0 || !r.textOk));
-  console.log(`${results.length} checks, ${bad.length} failing, ${results.filter((r) => r.excepted && r.diff).length} excepted`);
+  if (unverifiable.length) {
+    console.log("exceptionUnverifiable rows (edit couldn't be applied to the old side, still excepted):");
+    console.table(unverifiable.map((r) => ({ width: r.width, name: r.name, reason: r.exceptionReason })));
+  }
+  console.log(`${results.length} checks, ${bad.length} failing, ${unverifiable.length} exceptionUnverifiable`);
   process.exit(bad.length ? 1 : 0);
 }
 

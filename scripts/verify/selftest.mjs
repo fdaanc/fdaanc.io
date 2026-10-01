@@ -3,7 +3,8 @@
 // server nor migration data -- only the new site running on NEW.
 import { chromium } from "playwright";
 import fs from "node:fs";
-import { shot, compare, NEW } from "./visual.mjs";
+import { shot, compare, isExceptionUnverifiable, NEW } from "./visual.mjs";
+import { edits as contentEdits } from "../migrate/edits.mjs";
 
 const ops = JSON.parse(fs.readFileSync("scripts/migrate/ops.json", "utf8"));
 const newestPost = Object.keys(ops)[0]; // newest-first; guaranteed present on page 1 of the home listing
@@ -58,6 +59,26 @@ const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, dev
   });
   const r = compare(a.png, b.png, "verify-out/selftest-d.png");
   check("(d) list block char change -> non-zero diff", r.diff !== 0);
+}
+
+// (e) an exceptioned post (one with edits.mjs fixes applied cleanly, so exceptionUnverifiable
+// stays false) still fails on a deliberate, unrelated new-side change -- exceptions.json no
+// longer blankets the whole row by post identity (the bug that hid Task 8's excerpt-cut bug).
+// (This post's media was stripped during migration, so there's no real inline <img> left to hide
+// -- a text change inside the post content is an equally unrelated mutation to detect.)
+{
+  const file = "content/posts/2016-08-01-2015浦江之夏-上海七大高校联合夏季烧烤转载/index.html";
+  const postEdits = contentEdits.filter((e) => e.file === file).map(({ find, replace }) => ({ find, replace }));
+  const url = NEW + "/2016/08/01/2015浦江之夏-上海七大高校联合夏季烧烤转载/";
+  const postOps = { edits: postEdits, editSelector: "article.content" };
+  const a = await shot(page, url, { old: true, postOps });
+  const b = await shot(page, url, {
+    old: true, postOps,
+    mutate: () => { const el = document.querySelector("article.content p"); el.textContent = `X${el.textContent}`; },
+  });
+  const r = compare(a.png, b.png, "verify-out/selftest-e.png");
+  check("(e) edited post's edits apply cleanly -> not exceptionUnverifiable", !isExceptionUnverifiable(a.editResults));
+  check("(e) unrelated text change on an excepted post -> still reported as failure", r.diff !== 0);
 }
 
 await browser.close();
