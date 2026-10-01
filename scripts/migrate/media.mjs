@@ -50,7 +50,13 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
   const ops = { remove: [], unwrap: [], edited: null };
   const cues = [];
 
-  const removeWithEmptyAncestors = (el) => {
+  const removeWithEmptyAncestors = (el, { alwaysReport } = {}) => {
+    // Rule 6's "<a> text is empty/URL/filename" removal can sit inline in a sentence, with
+    // sibling text in the SAME block before/after it — the neighbor-prev/next check below
+    // only looks at sibling *elements*, so it never sees that case. For that call site,
+    // capture the containing block now (before removal) and always log its post-removal
+    // text, so a sentence left broken by an inline removal is never silently unflagged.
+    const block = alwaysReport ? $(el).closest("p,li,td,h1,h2,h3,h4,h5,h6,div") : null;
     const chain = [el];
     let top = $(el);
     while (true) {
@@ -82,6 +88,10 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
     const neighbor = top.prev().length ? top.prev() : top.next();
     top.remove();
     if (neighbor.length && CUE.test(neighbor.text())) cues.push(neighbor.text().trim().slice(0, 80));
+    if (alwaysReport && block && block.length) {
+      const text = block.text().trim().replace(/\s+/g, " ").slice(0, 120);
+      if (text) cues.push(text);
+    }
   };
 
   const copied = new Map(); // source file -> already-copied basename, so a PDF/image linked
@@ -131,7 +141,7 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
       else if (r.missing) {
         if (el.name === "a") {
           const text = $(el).text().trim();
-          if (!text || text === value || value.endsWith(text)) removeWithEmptyAncestors(el);
+          if (!text || text === value || value.endsWith(text)) removeWithEmptyAncestors(el, { alwaysReport: true });
           else { ops.unwrap.push(`a[href="${esc(value)}"]`); $(el).replaceWith($(el).contents()); }
         } else if (el.name === "source") removeWithEmptyAncestors($(el).closest("audio")[0] ?? el);
         else removeWithEmptyAncestors(el);

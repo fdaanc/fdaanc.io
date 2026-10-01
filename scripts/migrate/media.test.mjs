@@ -4,7 +4,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import * as cheerio from "cheerio";
-import { processMedia } from "./media.mjs";
+import { processMedia, report } from "./media.mjs";
 
 const setup = (body) => {
   const oldRoot = fs.mkdtempSync(path.join(os.tmpdir(), "old-"));
@@ -96,6 +96,18 @@ test("the same upload referenced twice (embed + download link) is copied only on
   processMedia(ctx);
   assert.equal(ctx.root.html(), '<object data="a.pdf"></object><a href="a.pdf">Download</a>');
   assert.deepEqual(fs.readdirSync(ctx.dir).filter((f) => f.endsWith(".pdf")), ["a.pdf"]);
+});
+
+// An inline dead link whose text is its own URL/filename sits mid-sentence with sibling text
+// on both sides in the SAME block — the neighbor-prev/next cue check never sees that (it only
+// looks at sibling elements), so this must always be flagged regardless of cue-word matching.
+test("an inline URL-text link removed from a sentence is always flagged for manual edit", () => {
+  const before = report.length;
+  const ctx = setup('<p>报名请访问 <a href="../wp-content/uploads/2020/01/missing.pdf">missing.pdf</a> 谢谢。</p>');
+  processMedia(ctx);
+  assert.equal(ctx.root.html(), "<p>报名请访问  谢谢。</p>");
+  const added = report.slice(before);
+  assert.ok(added.some((line) => line.includes("needs manual edit") && line.includes("报名请访问") && line.includes("谢谢")));
 });
 
 test("srcset variants are dropped, not left pointing at wp-content", () => {
