@@ -5,9 +5,12 @@ import { execFileSync } from "node:child_process";
 const CACHE = "scripts/migrate/probe-cache.json";
 const cache = fs.existsSync(CACHE) ? JSON.parse(fs.readFileSync(CACHE, "utf8")) : {};
 export const report = [];
-// original absolute URL (as it appears in the old HTML) -> repo-relative localized file path,
-// for every hotlinked image downloaded. Consumed by the verify harness to route old-side
-// requests to the local copy instead of the live host.
+// postPath -> { original absolute URL (as it appears in the old HTML) -> repo-relative
+// localized file path }, for every hotlinked image downloaded. Keyed by post because the same
+// URL (e.g. a PayPal button CDN asset) is independently downloaded into several posts' own
+// folders -- a flat URL-keyed map would collapse those to whichever post was processed last.
+// Consumed by the verify harness to route old-side requests to the local copy of the post
+// currently being compared.
 export const localized = {};
 export const saveCache = () => fs.writeFileSync(CACHE, JSON.stringify(cache, null, 2));
 
@@ -132,7 +135,7 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
           const name = path.basename(new URL(value).pathname) || "image.jpg";
           copied.set(value, copyInto(dir, tmp, name)); fs.rmSync(tmp);
         }
-        localized[value] = path.join(dir, copied.get(value));
+        (localized[postPath] ??= {})[value] = path.join(dir, copied.get(value));
         return { local: copied.get(value) };
       }
     }

@@ -45,6 +45,22 @@ for (const { path: p, date } of posts) {
 fs.writeFileSync("scripts/migrate/ops.json", JSON.stringify(ops, null, 2));
 fs.writeFileSync("scripts/migrate/localized.json", JSON.stringify(localized, null, 2));
 saveCache();
-fs.writeFileSync("scripts/migrate/report.md", `# Migration report\n\n${report.join("\n")}\n`);
+
+// The same hotlinked URL is downloaded independently into every post that references it (the
+// verify harness's cross-post fallback lookup assumes those copies are byte-identical) -- record
+// any URL where they aren't, rather than silently picking one.
+const seenAt = {};
+const conflicts = [];
+for (const postMap of Object.values(localized)) {
+  for (const [url, file] of Object.entries(postMap)) {
+    if (seenAt[url] && seenAt[url] !== file && !fs.readFileSync(seenAt[url]).equals(fs.readFileSync(file))) conflicts.push(url);
+    else seenAt[url] ??= file;
+  }
+}
+if (conflicts.length) report.push(`\n## Localized URL conflicts (non-identical copies across posts)\n${conflicts.map((u) => `- ${u}`).join("\n")}`);
+
+// migrate.mjs regenerates this file from scratch every run, so hand-curated review notes live
+// in report-dispositions.md instead, which migrate.mjs never writes.
+fs.writeFileSync("scripts/migrate/report.md", `# Migration report\n\n${report.join("\n")}\n\nSee scripts/migrate/report-dispositions.md for the curated per-post review log.\n`);
 applyEdits();
 console.log(`migrated ${posts.length} posts`);

@@ -37,11 +37,25 @@ async function elementClip(page, selector) {
   }, selector);
 }
 
+// original URL -> file, merged across every post's own localized map (first copy found wins --
+// migrate.mjs already asserts/records any non-identical collision, so any copy is as good as
+// any other here). Used as the routing fallback for a page that shows several posts at once
+// (pagination, chrome-home) where there is no single "target" post to prefer.
+function mergeLocalized(nested) {
+  const merged = {};
+  for (const postMap of Object.values(nested)) for (const [url, file] of Object.entries(postMap)) merged[url] ??= file;
+  return merged;
+}
+
 // Old-side requests are localized/font-served/same-origin-passed or aborted; new-side requests
 // are same-origin by construction (everything self-hosted), so the same handler is correct for
 // both and keeps every third-party host (YouTube, PayPal, Google Fonts, gravatar) off the wire.
-export function setupRouting(page, { localized = {}, googleFontsCss = "" } = {}) {
-  return page.route("**/*", (route) => {
+// Returns a mutable `state` the caller updates (`state.post = p`) before each job, so a listing
+// page's hotlinked image resolves against the post currently under comparison first, falling
+// back to any other post's copy (merged) for a neighboring post's own resources.
+export async function setupRouting(page, { localized = {}, merged = {}, googleFontsCss = "" } = {}) {
+  const state = { post: null };
+  await page.route("**/*", (route) => {
     const url = route.request().url();
     if (/wp-emoji-release\.min\.js/.test(url)) return route.abort();
     let host, pathname;
@@ -53,10 +67,12 @@ export function setupRouting(page, { localized = {}, googleFontsCss = "" } = {})
     const fontFile = /^\/assets\/fonts\/[^/]+$/.test(pathname) ? pathname.slice(1) : null;
     if (fontFile) return route.fulfill({ path: path.resolve(fontFile), contentType: mimeFor(fontFile), headers: { "Access-Control-Allow-Origin": "*" } });
     if (host === "localhost:8001" || host === "localhost:8002") return route.continue();
-    if (localized[url]) return route.fulfill({ path: path.resolve(localized[url]), contentType: mimeFor(localized[url]) });
+    const file = (state.post && localized[state.post]?.[url]) ?? merged[url];
+    if (file) return route.fulfill({ path: path.resolve(file), contentType: mimeFor(file) });
     if (host === "fonts.googleapis.com") return route.fulfill({ contentType: "text/css; charset=utf-8", body: googleFontsCss });
     return route.abort();
   });
+  return state;
 }
 
 export async function settle(page, extraCss = "") {
@@ -95,24 +111,26 @@ export function compare(a, b, out) {
   return { diff };
 }
 
-// Run `items` through `worker(page, item)` using a fixed-size pool of pages, each lane pulling
-// the next queued item as it finishes (not statically pre-sliced), so a slow job on one lane
-// doesn't idle the others.
+// Run `items` through `worker(page, item, routeState)` using a fixed-size pool of pages, each
+// lane pulling the next queued item as it finishes (not statically pre-sliced), so a slow job
+// on one lane doesn't idle the others. `routeState` is whatever `setup(page)` returned (e.g.
+// setupRouting's mutable per-page state), threaded through so the worker can steer routing
+// per job without re-registering a route handler on every job.
 export async function withPool(browser, { count, viewport, setup }, items, worker) {
-  const pages = await Promise.all(Array.from({ length: Math.min(count, items.length) || 1 }, async () => {
+  const lanes = await Promise.all(Array.from({ length: Math.min(count, items.length) || 1 }, async () => {
     const page = await browser.newPage({ viewport, deviceScaleFactor: 1 });
-    if (setup) await setup(page);
-    return page;
+    const routeState = setup ? await setup(page) : null;
+    return { page, routeState };
   }));
   const results = new Array(items.length);
   let next = 0;
-  await Promise.all(pages.map(async (page) => {
+  await Promise.all(lanes.map(async ({ page, routeState }) => {
     while (next < items.length) {
       const i = next++;
-      results[i] = await worker(page, items[i]);
+      results[i] = await worker(page, items[i], routeState);
     }
   }));
-  await Promise.all(pages.map((p) => p.close()));
+  await Promise.all(lanes.map(({ page }) => page.close()));
   return results;
 }
 
@@ -120,6 +138,7 @@ async function main() {
   const ops = JSON.parse(fs.readFileSync("scripts/migrate/ops.json", "utf8"));
   const exceptions = JSON.parse(fs.readFileSync("scripts/verify/exceptions.json", "utf8"));
   const localized = JSON.parse(fs.readFileSync("scripts/migrate/localized.json", "utf8"));
+  const merged = mergeLocalized(localized);
   const googleFontsCss = fs.readFileSync("assets/css/fonts.css", "utf8").replace(/url\(\.\.\/fonts\//g, "url(http://localhost:8002/assets/fonts/");
   const argv = process.argv;
   const only = argv.includes("--only") ? argv[argv.indexOf("--only") + 1] : null;
@@ -161,13 +180,17 @@ async function main() {
   const results = [];
   for (const width of WIDTHS) {
     const idxPage = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
-    await setupRouting(idxPage, { localized, googleFontsCss });
+    await setupRouting(idxPage, { localized, merged, googleFontsCss });
     const oldListing = await listingIndex(idxPage, OLD, 15), newListing = await listingIndex(idxPage, NEW, 15);
     await idxPage.close();
 
     const jobList = jobs(oldListing, newListing);
-    const setup = (page) => setupRouting(page, { localized, googleFontsCss });
-    const jobResults = await withPool(browser, { count: concurrency, viewport: { width, height: 900 }, setup }, jobList, async (page, j) => {
+    const setup = (page) => setupRouting(page, { localized, merged, googleFontsCss });
+    const jobResults = await withPool(browser, { count: concurrency, viewport: { width, height: 900 }, setup }, jobList, async (page, j, routeState) => {
+      // A list/post job has a single target post ("post/2026/.../" or "list/2026/.../"), so its
+      // old-side hotlinked images prefer that post's own localized copy over another post's.
+      // Pages with no single target (pagination, chrome-home, 404) fall through to `merged`.
+      if (routeState) routeState.post = j.name.match(/^(?:post|list)(\/.*)$/)?.[1] ?? null;
       // display:none (not visibility:hidden) so the content column's box doesn't drive
       // page height while posts don't exist on the new side yet (Task 1's placeholder).
       const chromeCss = j.chromeOnly ? "article.content { display: none !important; }" : "";
@@ -190,7 +213,7 @@ async function main() {
     // Behavior: mobile nav toggles open and closes.
     if (width === 390) {
       const navPage = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
-      await setupRouting(navPage, { localized, googleFontsCss });
+      await setupRouting(navPage, { localized, merged, googleFontsCss });
       await navPage.goto(NEW + "/", { waitUntil: "load" });
       await navPage.click(".primary-nav-button");
       const opened = await navPage.$eval(".primary-nav", (e) => e.classList.contains("open"));
