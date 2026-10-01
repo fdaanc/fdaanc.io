@@ -42,12 +42,13 @@ Formatting reference: `**bold**`, `- list item`, `[link text](https://example.co
 ## For developers
 
 ```sh
-npm install
+npm install        # install dependencies
 npm start          # http://localhost:8080, live reload
 npm start -- --port 8888   # custom port
-npm test           # unit tests for template filters
-npm run build      # writes _site/
-npm run check      # link check, banned strings, script allowlist (also run in CI)
+npm test           # unit tests
+npm run build      # writes _site/ (gitignored)
+npm run format     # reformat (also in precommit hook)
+npm run check      # link check (also run in CI)
 ```
 
 | Path                                               | What it is                                                                        |
