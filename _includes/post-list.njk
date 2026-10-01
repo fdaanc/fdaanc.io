@@ -1,0 +1,13 @@
+	<section class="latest-post cf post hentry">
+		<section class="post-title-wrap cf post-title-wrap-no-image">
+			<h2 class="latest-post-title"><a href="{{ post.url }}">{{ post.data.title | safe }}</a></h2>
+			<p class="latest-post-date">
+				{{ post.date | longDate }}			</p>
+		</section>
+{% set body = post.content | absolutize(post.url) %}
+{%- if body | hasMore %}
+{{ body | beforeMore | safe }}{{ body | moreLink(post.url) | safe }}
+{%- else %}
+{{ body | safe }}
+{%- endif %}
+	</section>

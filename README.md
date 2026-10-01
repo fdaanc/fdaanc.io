@@ -1,66 +1,68 @@
-# fdaanc.io
+# 复旦大学北加州校友会 website
 
-Static copy of [www.fdaanc.org](https://www.fdaanc.org/) (复旦大学北加州校友会 /
-Fudan Alumni Association of Northern California), migrated off WordPress to
-GitHub Pages on 2026-09-23.
+Source for [www.fdaanc.org](https://www.fdaanc.org), the official site of the Fudan Alumni Association of Northern California. It's a static site built with [Eleventy](https://www.11ty.dev) and published to GitHub Pages on every change to `main`.
 
-The site is plain HTML served as-is (`.nojekyll`). Every page is the HTML
-WordPress rendered, with the same markup, theme (Minimize by Slocum Studio, GPL)
-and assets. Only links were changed:
+## For editors: add or edit a post
 
-- Links to the site are relative, so the site works both at a custom domain
-  root and at `https://fdaanc.github.io/fdaanc.io/`.
-- Pagination moved from `?paged=N` to `page/N/`.
-- `<link>` tags for WordPress-only services (REST API, XML-RPC, RSS feeds,
-  oEmbed, shortlinks) were removed from `<head>`.
-- A small inline script forwards old query-style URLs (`/?p=123`, `?paged=2`,
-  `?cat=4`, `?m=201202`, …) to their static pages, so old shared links keep
-  working.
+You need a GitHub account with write access to this repository. No software to install.
 
-## What does not carry over
+**Add a post**
 
-These depended on WordPress running a server, and a static host can't provide them:
+1. Open [`content/posts`](content/posts) and click **Add file → Create new file**.
+2. Name it `YYYY-MM-DD-short-name/index.md`, for example `2026-11-02-annual-meeting/index.md`. The date and short name become the address: `www.fdaanc.org/2026/11/02/annual-meeting/`.
+3. Paste this template and fill it in:
 
-- **Comments / login.** Comments were already closed site-wide. The
-  "You must be logged in" link still points at `wp-login.php`, which is gone
-  once DNS moves.
-- **RSS feeds** (`/feed/`).
-- **Search.** The theme had no search box, so nothing visible is lost.
+   ```markdown
+   ---
+   title: 2026年年会通知
+   date: 2026-11-02
+   ---
 
-Links that were already broken on WordPress (old 2010–2017 uploads that are
-missing from the server, and a few typo'd links in old posts) stay broken
-here. `tools/verify.py --check-live` confirms each one also returns 404 on
-the old site.
+   亲爱的校友们，
 
-## Editing from now on
+   正文写在这里。空一行开始新段落。
 
-Edit the HTML directly. A new post means copying an existing post's
-`index.html` into a new `YYYY/MM/DD/<slug>/` directory. Then add it to the top
-of `index.html` and `page/*/`, and to its category and archive pages.
+   [点击下载附件](notice.pdf)
+   ```
 
-## Re-syncing from WordPress (only while the old site is still up)
+4. Click **Commit changes**. The site updates in about a minute.
+
+**Attach a PDF or image**
+
+Open the post's folder, click **Add file → Upload files**, and drop the file in. Then link it by its file name only:
+
+- Link: `[Bylaw (PDF)](bylaw-2026.pdf)`
+- Image: `![Group photo](photo.jpg)`
+- To show a PDF inline on the page, add `embed_pdf: true` under `date:` in the template. The first PDF in the folder is shown.
+
+**Edit or delete a post:** open its `index.md` (or `index.html` for older posts), click the pencil icon or **⋯ → Delete file**, then commit.
+
+Formatting reference: `**bold**`, `- list item`, `[link text](https://example.com)`, `## Heading`.
+
+## For developers
 
 ```sh
-wget --mirror --page-requisites --no-parent --restrict-file-names=nocontrol \
-  --reject-regex '(/wp-admin/|/wp-login\.php|/xmlrpc\.php|/wp-json/|/feed/|replytocom=|/comments/feed|\?s=|/embed/|oembed|\+src\+)' \
-  -e robots=off -U "Mozilla/5.0" --wait=0.2 -P mirror \
-  https://www.fdaanc.org/ https://www.fdaanc.org/wp-sitemap.xml
-# month/year archives (from the Archives dropdown), attachment pages and
-# sitemaps are not reachable by plain links. Crawl them as a second pass
-# with -r -nc -i <url-list>.
-python3 tools/build.py mirror/www.fdaanc.org wp_ids.json 404_raw.html .
-python3 tools/verify.py . mirror/www.fdaanc.org --check-live
+npm install
+npm start          # http://localhost:8080, live reload
+npm start -- --port 8888   # custom port
+npm test           # unit tests for template filters
+npm run build      # writes _site/
+npm run check      # link check, banned strings, script allowlist (also run in CI)
 ```
 
-`wp_ids.json` maps WordPress IDs to permalinks (from `/wp-json/wp/v2/{posts,media,categories,tags,users}`).
-`404_raw.html` is the WordPress 404 page (fetch any missing URL).
+| Path                                               | What it is                                                                        |
+| -------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `content/posts/<date>-<name>/`                     | One post: `index.md` (older migrated posts use `index.html`) plus its attachments |
+| `content/index.njk`                                | Home page and `/page/N/` (5 posts per page)                                       |
+| `content/404.njk`, `content/redirects.njk`         | Not-found page; redirect pages for retired URLs                                   |
+| `_data/site.yml`                                   | Site title, slogan and sidebar (sponsors, WeChat ID, subscribe links)             |
+| `_data/redirects.js`                               | Retired URL → new URL                                                             |
+| `_includes/`                                       | Page layout, header, sidebar, footer, post and listing templates                  |
+| `assets/css/`                                      | Styles: `blocks.css` (content blocks), `theme.css`, `theme-blue.css`, `fonts.css` |
+| `assets/fonts/`, `assets/img/`, `assets/js/nav.js` | Self-hosted Open Sans, logo and icons, mobile menu toggle                         |
+| `lib/filters.js`                                   | Template filters (dates, excerpts, link rewriting)                                |
+| `.github/workflows/deploy.yml`                     | Build, check and deploy on push to `main`; build and check on PRs                 |
 
-## Moving www.fdaanc.org here
+Post front matter: `title` and `date` are required. `slug` overrides the URL name. `embed_pdf: true` embeds the first PDF. A post's URL is `/YYYY/MM/DD/<slug>/`; don't change the slug of a published post, because shared links would break.
 
-1. Repo **Settings → Pages → Custom domain**: `www.fdaanc.org` (this adds a
-   `CNAME` file). Then tick **Enforce HTTPS** once the certificate is issued.
-2. DNS: `www` CNAME → `fdaanc.github.io`. For the bare `fdaanc.org`, add
-   A records for 185.199.108.153, 185.199.109.153, 185.199.110.153 and
-   185.199.111.153.
-3. Keep WordPress running until the new site is confirmed live, then shut it
-   down.
+Deployment uses GitHub Pages with source **GitHub Actions** (Settings → Pages). The custom domain is set by `CNAME`.

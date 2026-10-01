@@ -1,0 +1,29 @@
+{
+  "name": "fdaanc-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "test": "node --test 'lib/*.test.js'",
+    "check": "node scripts/check.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,css,json,yml,yaml,md}": "prettier --write",
+    "*.njk": "prettier --write --parser html"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "husky": "9.1.7",
+    "js-yaml": "^5.4.2",
+    "lint-staged": "17.6.0",
+    "prettier": "3.9.9"
+  }
+}

@@ -1,0 +1,18 @@
+title: 复旦大学北加州校友会
+slogan: Fudan Alumni Association of Northern California (FDAANC)
+url: https://www.fdaanc.org
+sponsors:
+  - name: YC Law Group
+    url: https://yclawgroup.com
+wechat_id: fudan_norcal
+subscribe:
+  - {
+      class: r_google,
+      label: Google Group,
+      url: "https://groups.google.com/g/fudan_aanc",
+    }
+  - {
+      class: r_linkedin,
+      label: Linkedin Group,
+      url: "https://www.linkedin.com/groups/2237590/",
+    }

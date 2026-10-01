@@ -1,0 +1,24 @@
+				<!-- Page Sidebar-->
+		<aside class="sidebar widgets">
+				<section class="widget primary-sidebar primary-sidebar-widget widget_text"><h3 class="widgettitle widget-title primary-sidebar-widget-title">Sponsors</h3>			<div class="textwidget"><div style="text-align:left;">
+{% for sponsor in site.sponsors %}
+<a href="{{ sponsor.url }}" target="_blank" rel="noopener">
+{{ sponsor.name }}
+</a>
+{% endfor %}
+</div>
+<p></p>
+
+</div>
+		<section class="clear"></section></section><section class="widget primary-sidebar primary-sidebar-widget widget_text"><h3 class="widgettitle widget-title primary-sidebar-widget-title">微信公众号</h3>			<div class="textwidget"><div style="text-align:left;">
+{{ site.wechat_id }}
+</div>
+<p></p>
+
+</div>
+		<section class="clear"></section></section><section class="widget primary-sidebar primary-sidebar-widget widget_text"><h3 class="widgettitle widget-title primary-sidebar-widget-title">Subscribe</h3>			<div class="textwidget"><ul>
+{% for sub in site.subscribe %}
+<li class="{{ sub.class }}"><a target="_blank" href="{{ sub.url }}" rel="noopener">{{ sub.label }}</a></li>
+{% endfor %}
+</ul></div>
+		<section class="clear"></section></section>		</aside>

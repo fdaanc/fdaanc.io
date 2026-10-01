@@ -1,0 +1,13 @@
+---
+pagination:
+  data: redirects
+  size: 1
+  alias: r
+permalink: "{{ r.from }}"
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Redirecting…</title>
+<meta name="robots" content="noindex"><link rel="canonical" href="{{ r.to }}">
+<meta http-equiv="refresh" content="0; url={{ r.to }}"></head>
+<body><a href="{{ r.to }}">{{ r.to }}</a></body></html>

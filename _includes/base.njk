@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ (pageTitle or title) | stripTags }}</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/blocks.css" />
+		<link rel="stylesheet" href="/assets/css/theme.css" />
+		<link rel="stylesheet" href="/assets/css/fonts.css" />
+		<link rel="stylesheet" href="/assets/css/theme-blue.css" />
+		<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+		<link rel="alternate" type="application/atom+xml" href="/feed.xml" title="{{ site.title }}" />
+		<link rel="icon" href="/assets/img/logo-32x32.png" sizes="32x32" />
+		<link rel="icon" href="/assets/img/logo-192x192.png" sizes="192x192" />
+		<link rel="apple-touch-icon" href="/assets/img/logo-180x180.png" />
+		<meta name="msapplication-TileImage" content="/assets/img/logo-270x270.png" />
+	</head>
+	<body lang="en-US" class="cols-2">
+{% include "header.njk" %}
+	<section class="{{ wrapperClass or 'content-wrapper cf' }}">
+		<article class="{{ articleClass or 'content cf' }}">
+{{ content | safe }}
+		</article>
+{% include "sidebar.njk" %}
+	</section>
+	<section class="clear"></section>
+{% include "footer.njk" %}
+	<script src="/assets/js/nav.js"></script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+{%- set currentPage = pagination.pageNumber + 1 -%}
+{%- set totalPages = pagination.pages.length -%}
+{%- macro pageHref(n) -%}{% if n == 1 %}/{% else %}/page/{{ n }}/{% endif %}{%- endmacro -%}
+<footer class="pagination">
+	<ul class='page-numbers'>
+	{%- if currentPage > 1 %}
+	<li><a class="prev page-numbers" href="{{ pageHref(currentPage - 1) }}">&#8592; Previous</a></li>
+	{%- endif %}
+	{%- for i in range(1, totalPages + 1) %}
+		{%- set show = (i == 1 or i == totalPages or (i >= currentPage - 2 and i <= currentPage + 2)) -%}
+		{%- if show %}
+			{%- set showPrev = (i - 1 == 1 or i - 1 == totalPages or (i - 1 >= currentPage - 2 and i - 1 <= currentPage + 2)) -%}
+			{%- if i > 1 and not showPrev %}
+	<li><span class="page-numbers dots">&hellip;</span></li>
+			{%- endif %}
+			{%- if i == currentPage %}
+	<li><span aria-current="page" class="page-numbers current">{{ i }}</span></li>
+			{%- else %}
+	<li><a class="page-numbers" href="{{ pageHref(i) }}">{{ i }}</a></li>
+			{%- endif %}
+		{%- endif %}
+	{%- endfor %}
+	{%- if currentPage < totalPages %}
+	<li><a class="next page-numbers" href="{{ pageHref(currentPage + 1) }}">Next &#8594;</a></li>
+	{%- endif %}
+	</ul>
+</footer>

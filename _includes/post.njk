@@ -1,0 +1,31 @@
+---
+layout: base.njk
+---
+{%- set prevPost = collections.posts | getNextCollectionItem(page) -%}
+{%- set nextPost = collections.posts | getPreviousCollectionItem(page) -%}
+	<section class="latest-post cf post hentry">
+		<section class="post-title-wrap cf post-title-wrap-no-image">
+			<h1 class="post-title page-title">{{ title | safe }}</h1>
+			<p class="latest-post-date">{{ page.date | longDate }}</p>
+		</section>
+{{ content | safe }}
+{%- if embed_pdf %}{% set pdf = page.inputPath | firstPdf %}{% if pdf %}
+<div class="fd-block-file"><object class="fd-block-file__embed" data="{{ pdf }}" type="application/pdf" style="width:100%;height:600px" aria-label="Embed of {{ pdf }}"></object><a href="{{ pdf }}">{{ pdf | replace(".pdf", "") }}</a><a href="{{ pdf }}" class="fd-block-file__button fd-element-button" download>Download</a></div>
+{%- endif %}{% endif %}
+		<section class="clear"></section>
+	</section>
+	<section class="after-posts-widgets no-widgets">
+	</section>
+	<footer class="post-footer">
+		<section class="single-post-navigation post-navigation">
+			{%- if nextPost %}
+			<section class="previous-posts">
+				<a href="{{ nextPost.url }}" rel="next">&laquo; {{ nextPost.data.title | safe }}</a>			</section>
+			{%- endif %}
+			{%- if prevPost %}
+			<section class="next-posts">
+				<a href="{{ prevPost.url }}" rel="prev">{{ prevPost.data.title | safe }} &raquo;</a>			</section>
+			{%- endif %}
+		</section>
+	</footer>
+	<section class="clear"></section>

@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: Page not found – 复旦大学北加州校友会
+permalink: /404.html
+wrapperClass: content-wrapper 404-content cf
+articleClass: content
+eleventyExcludeFromCollections: true
+---
+			<header class="404-title">
+				<h1 title="404 Error" class="page-title">404 Error</h1>
+			</header>
+			<section class="404-error no-posts latest-post">
+				<p>We apologize but something when wrong while trying to find what you were looking for. Please use the navigation below to navigate to your destination.</p>
+						<div class="sds-sitemap sitemap">
+										<div class="sitemap-post-type-list sitemap-post-list post-type-list">
+								<h2 title="Posts">
+									Posts								</h2>
+								<ul>
+{%- for p in collections.posts %}
+											<li><a href="{{ p.url }}">{{ p.data.title | safe }}</a></li>
+{%- endfor %}
+								</ul>
+							</div>
+								</div>
+				</section>

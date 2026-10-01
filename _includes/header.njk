@@ -1,0 +1,32 @@
+	<!-- Header	-->
+		<header id="header" class="cf">
+				<!-- Logo	-->
+			<section class="logo-box">
+{% if isHome %}
+					<h1 id="title" class="site-title site-title-no-logo no-logo">
+			<a href="/" title="{{ site.title }}">
+				{{ site.title }}			</a>
+		</h1>
+						<h2 id="slogan" class="slogan ">
+			{{ site.slogan }} </h2>
+{% else %}
+					<p id="title" class="site-title site-title-no-logo no-logo">
+			<a href="/" title="{{ site.title }}">
+				{{ site.title }}			</a>
+		</p>
+						<p id="slogan" class="slogan ">
+			{{ site.slogan }}		</p>
+{% endif %}
+				</section>
+	<!--  nav options	-->
+			<aside class="nav-options">
+				<section class="header-cta-container header-call-to-action no-widgets">
+									</section>
+			</aside>
+			<section class="clear"></section>
+
+	<!-- main nav	-->
+			<nav class="primary-nav-container">
+				<button class="primary-nav-button"><img src="/assets/img/menu-icon-large.png" alt="Toggle Navigation" />Navigation</button>
+				<div class="primary-nav menu"><ul><li{% if isHome %} class="current_page_item"{% endif %}><a href="/">Home</a></li></ul></div>			</nav>
+		</header>
