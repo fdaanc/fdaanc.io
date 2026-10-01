@@ -1,8 +1,15 @@
 ---
 layout: base.njk
-title: 复旦大学北加州校友会 – Fudan Alumni Association of Northern California (FDAANC)
 isHome: true
 wrapperClass: content-wrapper front-page-content front-page cf
 articleClass: content
-permalink: /
+pagination:
+  data: collections.posts
+  size: 5
+  alias: pagePosts
+permalink: "{% if pagination.pageNumber == 0 %}/{% else %}/page/{{ pagination.pageNumber + 1 }}/{% endif %}"
+eleventyComputed:
+  title: "{% if pagination.pageNumber == 0 %}复旦大学北加州校友会 – Fudan Alumni Association of Northern California (FDAANC){% else %}复旦大学北加州校友会 – Page {{ pagination.pageNumber + 1 }} – Fudan Alumni Association of Northern California{% endif %}"
 ---
+{% for post in pagePosts %}{% include "post-list.njk" %}{% endfor %}
+{% include "pagination.njk" %}
