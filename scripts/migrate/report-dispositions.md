@@ -67,6 +67,20 @@ and were downloaded into their own post folder, no manual edit needed:
 - /2012/07/08/2012-shanghai-alumni-summer-bbq-open-for-registration/
 - /2012/01/09/night-of-shanghai-2012/
 
+## Same-site links to a page that never existed (Fix round 1, Task 6+7 review)
+
+`processMedia()`'s own-page branch originally rewrote any `../`-relative or
+`fdaanc.org/`-absolute link to its root-relative equivalent without checking that the
+target page ever existed in the old tree — so a stray link to a page that was simply never
+built (not one that's since gone missing) was silently rewritten into a 404 on the new
+site. Fixed by checking `<oldRoot><path>/index.html` (or `<oldRoot><path>` for a file-like
+path) before rewriting; a target that isn't there now follows the same rule-6 path as any
+other dead resource.
+
+| Post | Cue(s) | Disposition |
+|---|---|---|
+| /2009/09/23/fudan-university-delegation-september-2009/ | 2x `/RSVP/` link (no such page anywhere in the old tree) | **No edit needed** — both occurrences read "Please go to \<a href="/RSVP/"\>https://www.fdaanc.org/RSVP/\</a\> to register for the event."; the visible text is already the full URL and differs from the (relative) href, so rule 6 unwraps rather than removes — the sentence reads the same with or without the link |
+
 ## R6 grep, exactly as run
 
 ```

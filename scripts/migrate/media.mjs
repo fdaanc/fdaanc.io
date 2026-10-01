@@ -123,7 +123,18 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
       return { local: copied.get(file) };
     }
     const own = value.match(OWN);
-    if (own) return { rewrite: "/" + own[1] };
+    if (own) {
+      // A same-site link only has somewhere to land if that path actually exists in the old
+      // tree; a stray link to a page that was never there (e.g. a never-built /RSVP/ page)
+      // must be treated like any other dead resource, not silently rewritten to a 404.
+      const clean = decodeURI(own[1].split(/[?#]/)[0]);
+      if (clean) {
+        const isFile = /\.[a-z0-9]+$/i.test(clean.split("/").pop());
+        const target = path.join(oldRoot, clean, isFile ? "" : "index.html");
+        if (!fs.existsSync(target)) return { missing: true };
+      }
+      return { rewrite: "/" + own[1] };
+    }
     if (/^https?:/.test(value) && !offline) {
       const state = probe(value, isImg);
       if (state === "uncertain") report.push(`- ${postPath}: uncertain ${value}`);
@@ -154,7 +165,12 @@ export function processMedia({ $, root, postPath, dir, oldRoot, offline = false 
   for (const [sel, attr] of [["img[src]", "src"], ["input[type=\"image\"][src]", "src"], ["source[src]", "src"], ["object[data]", "data"], ["a[href]", "href"]]) {
     root.find(sel).each((_, el) => {
       if (!el.parent) return; // already removed with an ancestor
-      const value = el.attribs[attr];
+      // A stray leading/trailing space in the original markup (seen in a few old posts) makes
+      // an otherwise-ordinary https:// link fail every classification regex below, since they
+      // all anchor at the start of the string -- it would silently fall through unclassified
+      // and keep its broken, un-probed value. Normalize before classifying, not just on output.
+      const value = (el.attribs[attr] ?? "").trim();
+      if (value !== el.attribs[attr]) el.attribs[attr] = value;
       const r = resolve(value, el.name === "img" || el.name === "input");
       if (r.local) el.attribs[attr] = r.local;
       else if (r.rewrite) el.attribs[attr] = r.rewrite;

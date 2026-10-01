@@ -488,7 +488,10 @@
   },
   "/2009/09/23/fudan-university-delegation-september-2009/": {
     "remove": [],
-    "unwrap": [],
+    "unwrap": [
+      "a[href$=\"RSVP/\"]",
+      "a[href$=\"RSVP/\"]"
+    ],
     "edited": null
   },
   "/2009/08/17/2009-alumni-summer-bbq/": {

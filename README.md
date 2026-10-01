@@ -38,8 +38,7 @@ point `data`/`href` at your PDF's filename:
 <div class="fd-block-file"><object class="fd-block-file__embed" data="your-file.pdf" type="application/pdf" style="width:100%;height:600px"></object> <a href="your-file.pdf">your-file.pdf</a></div>
 ```
 
-Save your changes (or open a pull request) on GitHub; the site rebuilds and
-deploys automatically.
+Save your changes (or open a pull request) on GitHub.
 
 ## Developers
 

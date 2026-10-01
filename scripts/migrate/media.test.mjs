@@ -119,6 +119,34 @@ test("srcset variants are dropped, not left pointing at wp-content", () => {
 
 test("own page links become root-absolute", () => {
   const ctx = setup('<a href="../../../../2012/02/11/choir-championship-again/">x</a>');
+  fs.mkdirSync(path.join(ctx.oldRoot, "2012/02/11/choir-championship-again"), { recursive: true });
+  fs.writeFileSync(path.join(ctx.oldRoot, "2012/02/11/choir-championship-again/index.html"), "<html></html>");
   processMedia(ctx);
   assert.equal(ctx.root.html(), '<a href="/2012/02/11/choir-championship-again/">x</a>');
+});
+
+// A stray leading/trailing space in the original href (seen in a few old posts) must not make
+// an otherwise-live https:// link fall through every classification check unprobed.
+test("whitespace around an href is trimmed before classifying", () => {
+  const ctx = setup('<a href=" https://fdaanc.org/2012/02/11/choir-championship-again/ ">x</a>');
+  fs.mkdirSync(path.join(ctx.oldRoot, "2012/02/11/choir-championship-again"), { recursive: true });
+  fs.writeFileSync(path.join(ctx.oldRoot, "2012/02/11/choir-championship-again/index.html"), "<html></html>");
+  processMedia(ctx);
+  assert.equal(ctx.root.html(), '<a href="/2012/02/11/choir-championship-again/">x</a>');
+});
+
+// A same-site link to a page that was never built (not just one that's since gone missing)
+// is a dead link like any other, and follows the same rule-6 text-vs-href branching.
+test("a same-site link to a page absent from the old tree is unwrapped when its text differs from the href", () => {
+  const ctx = setup('<p>Please go to <a href="../../../../RSVP/">https://fdaanc.org/RSVP/</a> to register.</p>');
+  const ops = processMedia(ctx);
+  assert.equal(ctx.root.html(), "<p>Please go to https://fdaanc.org/RSVP/ to register.</p>");
+  assert.deepEqual(ops.unwrap, ['a[href$="RSVP/"]']);
+});
+
+test("a same-site link to a page absent from the old tree is removed when its text is the href", () => {
+  const ctx = setup('<p>See <a href="../../../../RSVP/">../../../../RSVP/</a> for details.</p>');
+  const ops = processMedia(ctx);
+  assert.equal(ctx.root.html(), "<p>See  for details.</p>");
+  assert.deepEqual(ops.remove, ['a[href$="RSVP/"]']);
 });

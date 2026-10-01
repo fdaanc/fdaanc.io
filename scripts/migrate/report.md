@@ -106,6 +106,7 @@
 - /2010/03/05/longfeifei-youth-summer-camp-fdfz-2010-shanghai/: uncertain http://longfeifei.com/aboutus/http%7C/www.fdfzxy.org/fund/index.php
 - /2010/03/05/longfeifei-youth-summer-camp-fdfz-2010-shanghai/: removed 1, unwrapped 3
   - **needs manual edit** near: "Please go to longfeifei websit for detail:"
+- /2009/09/23/fudan-university-delegation-september-2009/: removed 0, unwrapped 2
 - /2009/08/17/2009-alumni-summer-bbq/: removed 0, unwrapped 1
 - /2009/07/24/仲夏在复旦-龙飞飞少年夏令营-2009/: removed 0, unwrapped 1
 - /2006/02/16/night-of-shanghai-2006/: removed 1, unwrapped 0
