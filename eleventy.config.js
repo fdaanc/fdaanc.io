@@ -12,6 +12,12 @@ export default function (eleventyConfig) {
   for (const [name, fn] of Object.entries(f)) eleventyConfig.addFilter(name, fn);
   eleventyConfig.addCollection("posts", (api) =>
     api.getFilteredByGlob("content/posts/*/index.{md,html}").sort((a, b) => b.date - a.date));
+  eleventyConfig.addPlugin(feedPlugin, {
+    type: "atom", outputPath: "/feed.xml",
+    collection: { name: "posts", limit: 20 },
+    metadata: { language: "zh", title: "复旦大学北加州校友会", subtitle: "Fudan Alumni Association of Northern California (FDAANC)",
+      base: "https://www.fdaanc.org/", author: { name: "复旦大学北加州校友会" } },
+  });
 
   return {
     dir: { input: "content", includes: "../_includes", data: "../_data", output: "_site" },
