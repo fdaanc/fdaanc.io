@@ -1,0 +1,6 @@
+# Migrated post bodies: byte-verified against the old site; never reformat.
+content/posts/**/*.html
+
+# Build output and dependencies
+_site/
+node_modules/

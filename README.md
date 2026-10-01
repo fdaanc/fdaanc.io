@@ -17,6 +17,7 @@ You need a GitHub account with write access to this repository. No software to i
    title: 2026年年会通知
    date: 2026-11-02
    ---
+
    亲爱的校友们，
 
    正文写在这里。空一行开始新段落。
@@ -43,23 +44,24 @@ Formatting reference: `**bold**`, `- list item`, `[link text](https://example.co
 ```sh
 npm install
 npm start          # http://localhost:8080, live reload
+npm start -- --port 8888   # custom port
 npm test           # unit tests for template filters
 npm run build      # writes _site/
 npm run check      # link check, banned strings, script allowlist (also run in CI)
 ```
 
-| Path | What it is |
-|---|---|
-| `content/posts/<date>-<name>/` | One post: `index.md` (older migrated posts use `index.html`) plus its attachments |
-| `content/index.njk` | Home page and `/page/N/` (5 posts per page) |
-| `content/404.njk`, `content/redirects.njk` | Not-found page; redirect pages for retired URLs |
-| `_data/site.yml` | Site title, slogan and sidebar (sponsors, WeChat ID, subscribe links) |
-| `_data/redirects.js` | Retired URL → new URL |
-| `_includes/` | Page layout, header, sidebar, footer, post and listing templates |
-| `assets/css/` | Styles: `blocks.css` (content blocks), `theme.css`, `theme-blue.css`, `fonts.css` |
-| `assets/fonts/`, `assets/img/`, `assets/js/nav.js` | Self-hosted Open Sans, logo and icons, mobile menu toggle |
-| `lib/filters.js` | Template filters (dates, excerpts, link rewriting) |
-| `.github/workflows/deploy.yml` | Build, check and deploy on push to `main`; build and check on PRs |
+| Path                                               | What it is                                                                        |
+| -------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `content/posts/<date>-<name>/`                     | One post: `index.md` (older migrated posts use `index.html`) plus its attachments |
+| `content/index.njk`                                | Home page and `/page/N/` (5 posts per page)                                       |
+| `content/404.njk`, `content/redirects.njk`         | Not-found page; redirect pages for retired URLs                                   |
+| `_data/site.yml`                                   | Site title, slogan and sidebar (sponsors, WeChat ID, subscribe links)             |
+| `_data/redirects.js`                               | Retired URL → new URL                                                             |
+| `_includes/`                                       | Page layout, header, sidebar, footer, post and listing templates                  |
+| `assets/css/`                                      | Styles: `blocks.css` (content blocks), `theme.css`, `theme-blue.css`, `fonts.css` |
+| `assets/fonts/`, `assets/img/`, `assets/js/nav.js` | Self-hosted Open Sans, logo and icons, mobile menu toggle                         |
+| `lib/filters.js`                                   | Template filters (dates, excerpts, link rewriting)                                |
+| `.github/workflows/deploy.yml`                     | Build, check and deploy on push to `main`; build and check on PRs                 |
 
 Post front matter: `title` and `date` are required. `slug` overrides the URL name. `embed_pdf: true` embeds the first PDF. A post's URL is `/YYYY/MM/DD/<slug>/`; don't change the slug of a published post, because shared links would break.
 
