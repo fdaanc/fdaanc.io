@@ -1,87 +1,86 @@
-body{
-	color: #555555;
+body {
+  color: #555555;
 }
 
 a {
-	color: #3c639a;
+  color: #3c639a;
 }
 
-header #title a{
-	color: #555;
+header #title a {
+  color: #555;
 }
 
-.slogan{
-	color: #986819;
+.slogan {
+  color: #986819;
 }
 
 header .header-call-to-action .widget {
-	background: #3c639a;
-	color: #fff;
+  background: #3c639a;
+  color: #fff;
 }
-
 
 /* =Top Navigation
 -------------------------------------------------------------- */
-nav ul.secondary-nav li a{
-	color: #3c639a;
+nav ul.secondary-nav li a {
+  color: #3c639a;
 }
-
 
 /* =Primary Navigation
 -------------------------------------------------------------- */
-nav .primary-nav{
-	background-color: #3c639a;
+nav .primary-nav {
+  background-color: #3c639a;
 }
 
-nav .primary-nav li a{
-	color: #fff;
+nav .primary-nav li a {
+  color: #fff;
 }
 
-nav .primary-nav li a:hover{
-	background: rgba(0, 0, 0, .3);
+nav .primary-nav li a:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 
-nav .primary-nav li ul.sub-menu, .primary-nav-container li ul.children {
-	background: #3c639a;
+nav .primary-nav li ul.sub-menu,
+.primary-nav-container li ul.children {
+  background: #3c639a;
 }
 
-nav .primary-nav li ul.sub-menu li a, .primary-nav-container li ul.children li a {
-	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+nav .primary-nav li ul.sub-menu li a,
+.primary-nav-container li ul.children li a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-nav .primary-nav li a:hover{
-	background-color: rgba(0, 0, 0, .35);
+nav .primary-nav li a:hover {
+  background-color: rgba(0, 0, 0, 0.35);
 }
-
 
 /* =Core CSS classes
 -------------------------------------------------------------- */
 .fd-caption {
-    background: #fff;
-    border: 1px solid #f0f0f0;
+  background: #fff;
+  border: 1px solid #f0f0f0;
 }
 
 .fd-caption img {
-    border: 0 none;
+  border: 0 none;
 }
-
 
 ::-webkit-input-placeholder {
-   color: #362f2d;
+  color: #362f2d;
 }
 
-:-moz-placeholder { /* Firefox 18- */
-   color: #362f2d;  
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #362f2d;
 }
 
-::-moz-placeholder {  /* Firefox 19+ */
-   color: #362f2d;  
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #362f2d;
 }
 
-:-ms-input-placeholder {  
-   color: #362f2d;  
+:-ms-input-placeholder {
+  color: #362f2d;
 }
-
 
 /* =Buttons
 -------------------------------------------------------------- */
@@ -95,9 +94,10 @@ article.full-width-content a.post-edit-link,
 article.full-width-content .previous-posts a,
 article.full-width-content .next-posts a,
 .gform_wrapper .gform_footer input.button,
-.gform_wrapper .gform_footer input[type=submit], .button {
-	background: #f5d39b;
-	color: #986819;
+.gform_wrapper .gform_footer input[type="submit"],
+.button {
+  background: #f5d39b;
+  color: #986819;
 }
 
 p a.button:hover,
@@ -110,58 +110,61 @@ article.full-width-content a.post-edit-link:hover,
 article.full-width-content .previous-posts a:hover,
 article.full-width-content .next-posts a:hover,
 .gform_wrapper .gform_footer input.button:hover,
-.gform_wrapper .gform_footer input[type=submit]:hover, .button:hover {
-	background: #986819;
-	color: #f5d39b;
+.gform_wrapper .gform_footer input[type="submit"]:hover,
+.button:hover {
+  background: #986819;
+  color: #f5d39b;
 }
-
 
 /* =Breadcrumbs
 -------------------------------------------------------------- */
-section.breadcrumb{
-	color: #999;
+section.breadcrumb {
+  color: #999;
 }
-
 
 /* =Front Page Slider
 -------------------------------------------------------------- */
 .front-page-slider-title {
-	color: #fff;
-	background: #86a5d6;
-	background: rgba(134, 165, 214, .5);
+  color: #fff;
+  background: #86a5d6;
+  background: rgba(134, 165, 214, 0.5);
 }
-
 
 /* =Page/Post Content
 -------------------------------------------------------------- */
 h1.page-title a {
-	color: #555 !important;
+  color: #555 !important;
 }
 
 .sticky {
-	background: #e1e6ef;
+  background: #e1e6ef;
 }
 
-article.content a, article.full-width-content a {
-	color: #3c639a;
+article.content a,
+article.full-width-content a {
+  color: #3c639a;
 }
 
-article.content blockquote, article.content table th, blockquote, table th {
-	background: #e1e6ef;
+article.content blockquote,
+article.content table th,
+blockquote,
+table th {
+  background: #e1e6ef;
 }
 
-article.content table th, table th{
-	border: 1px solid #d3dae8;
+article.content table th,
+table th {
+  border: 1px solid #d3dae8;
 }
 
-section.latest-post{
-	border-bottom: 1px solid;
-	border-color: rgba(0, 0, 0, .15);
+section.latest-post {
+  border-bottom: 1px solid;
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
-figure.latest-post-image img{
-	-webkit-box-shadow:  0px 0px 1px 1px rgba(0, 0, 0, .2);
-	box-shadow:  0px 0px 1px 1px rgba(0, 0, 0, .2);
+figure.latest-post-image img {
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 /*.after-posts-widget {
@@ -174,160 +177,205 @@ article.content .after-posts-widget a {
 	
 }*/
 
-footer.post-footer{
-	background: none;
-	color: #08162d;
+footer.post-footer {
+  background: none;
+  color: #08162d;
 }
 
-footer.pagination{
-	background: #f2f2f2;
+footer.pagination {
+  background: #f2f2f2;
 }
-
 
 /* =Social Media Widget
 -------------------------------------------------------------- */
-.widget .social-media-icons a, .footer-widget .social-media-icons a {
-	background: #3c639a;
+.widget .social-media-icons a,
+.footer-widget .social-media-icons a {
+  background: #3c639a;
 }
-
 
 /* =Footer
 -------------------------------------------------------------- */
-footer#footer{
-	border-top: 1px solid;
-	border-top-color: rgba(0, 0, 0, .15);
+footer#footer {
+  border-top: 1px solid;
+  border-top-color: rgba(0, 0, 0, 0.15);
 }
 
 section.footer-widget {
-	background: #f2f2f2;
+  background: #f2f2f2;
 }
 
 section.footer-widget:hover {
-	-webkit-box-shadow: 0px 0px 5px 2px rgba(134, 203, 216, .5);
-	box-shadow: 0px 0px 5px 2px rgba(134, 203, 216, .5);
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(134, 203, 216, 0.5);
+  box-shadow: 0px 0px 5px 2px rgba(134, 203, 216, 0.5);
 }
 
-.copyright{
-	color: #bab9b9;
+.copyright {
+  color: #bab9b9;
 }
 
-.copyright a{
-	color: #3c639a;
+.copyright a {
+  color: #3c639a;
 }
 
 /* ----------
    Newsletter
  ------------ */
-.mc-gravity .gform_heading, .mc_gravity .gform_heading, .mc-newsletter .gform_heading, .mc_newsletter .gform_heading,
-.mc-gravity_wrapper .gform_heading, .mc_gravity_wrapper .gform_heading, .mc-newsletter_wrapper .gform_heading, .mc_newsletter_wrapper .gform_heading,
-.mc-gravity-confirmation, .mc_gravity-confirmation, .mc-newsletter-confirmation, .mc_newsletter-confirmation {
-	background: #3c639a;
+.mc-gravity .gform_heading,
+.mc_gravity .gform_heading,
+.mc-newsletter .gform_heading,
+.mc_newsletter .gform_heading,
+.mc-gravity_wrapper .gform_heading,
+.mc_gravity_wrapper .gform_heading,
+.mc-newsletter_wrapper .gform_heading,
+.mc_newsletter_wrapper .gform_heading,
+.mc-gravity-confirmation,
+.mc_gravity-confirmation,
+.mc-newsletter-confirmation,
+.mc_newsletter-confirmation {
+  background: #3c639a;
 }
-
 
 /* =Responsive Structure
 -------------------------------------------------------------- */
-@media only screen and (max-width : 640px) {
-	.nav-button, .primary-nav-button {
-		background-color: #3c639a;
-	}
+@media only screen and (max-width: 640px) {
+  .nav-button,
+  .primary-nav-button {
+    background-color: #3c639a;
+  }
 
-	.primary-nav-button {
-		color: #fff;
-		background: #3c639a;
-	}
+  .primary-nav-button {
+    color: #fff;
+    background: #3c639a;
+  }
 
-		.nav-button:hover, .primary-nav-button:hover {
-		background-color: #05254f;
-	}
+  .nav-button:hover,
+  .primary-nav-button:hover {
+    background-color: #05254f;
+  }
 
-	.primary-nav-button:hover {
-		background: #05254f;
-	}
+  .primary-nav-button:hover {
+    background: #05254f;
+  }
 
-	.nav-button.open, .primary-nav-button.open {
-		background-color: #05254f;
-	}
+  .nav-button.open,
+  .primary-nav-button.open {
+    background-color: #05254f;
+  }
 
-	.primary-nav-button.open {
-		background: #05254f;
-	}
+  .primary-nav-button.open {
+    background: #05254f;
+  }
 
-	nav ul.top-nav, nav .primary-nav {
-		background-color: #fff; /* ---- Color Change ----*/
-		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.05));
-		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.05));
-		background-image:    -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.05));
-		background-image:     -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.05));
-		background-image:      -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.05));
-		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,.05)));
-		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.6);
-		box-shadow: 0 1px 2px rgba(0,0,0,.6);
-	}
+  nav ul.top-nav,
+  nav .primary-nav {
+    background-color: #fff; /* ---- Color Change ----*/
+    background-image: linear-gradient(
+      top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.05)
+    );
+    background-image: -webkit-linear-gradient(
+      top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.05)
+    );
+    background-image: -moz-linear-gradient(
+      top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.05)
+    );
+    background-image: -ms-linear-gradient(
+      top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.05)
+    );
+    background-image: -o-linear-gradient(
+      top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.05)
+    );
+    background-image: -webkit-gradient(
+      linear,
+      0 0,
+      0 100%,
+      from(rgba(0, 0, 0, 0)),
+      to(rgba(0, 0, 0, 0.05))
+    );
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
 
-	nav .primary-nav {
-		background: transparent;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-	}
+  nav .primary-nav {
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
 
-	nav .primary-nav li {
-		background-color: #3c639a;
-	}
+  nav .primary-nav li {
+    background-color: #3c639a;
+  }
 
-	nav ul.top-nav li a, nav .primary-nav li a {
-		color: #3c639a;
-		border-bottom: 1px solid rgba(0,0,0,.2);
-		border-top: 1px solid rgba(255,255,255,.1); 
-	}
+  nav ul.top-nav li a,
+  nav .primary-nav li a {
+    color: #3c639a;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
 
-	nav .primary-nav li a {
-		color: #fff;
-	}
+  nav .primary-nav li a {
+    color: #fff;
+  }
 
-	nav ul.top-nav li a:hover {
-		background-color: rgba(0,0,0,.1);
-	}
+  nav ul.top-nav li a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 
-	nav ul.top-nav > li:first-child {
-		border-top: 1px solid rgba(0,0,0,.2);
-	}
+  nav ul.top-nav > li:first-child {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+  }
 
-	nav ul.top-nav li .sub-menu > li a:after, nav .primary-nav li .sub-menu > li a:after, .primary-nav-container li ul.children > li a:after {
-		content: ">";
-		color: rgba(255,255,255,.5);
-	}
+  nav ul.top-nav li .sub-menu > li a:after,
+  nav .primary-nav li .sub-menu > li a:after,
+  .primary-nav-container li ul.children > li a:after {
+    content: ">";
+    color: rgba(255, 255, 255, 0.5);
+  }
 
-	nav ul.top-nav li ul.sub-menu  > a:hover, nav .primary-nav li ul.sub-menu  > a:hover, .primary-nav-container li ul.children > a:hover {
-		background: rgba(0,0,0,.75);
-	}
+  nav ul.top-nav li ul.sub-menu > a:hover,
+  nav .primary-nav li ul.sub-menu > a:hover,
+  .primary-nav-container li ul.children > a:hover {
+    background: rgba(0, 0, 0, 0.75);
+  }
 
-	nav ul.top-nav li ul, nav .primary-nav li ul {
-		background: rgba(0,0,0,.5);
-	}
+  nav ul.top-nav li ul,
+  nav .primary-nav li ul {
+    background: rgba(0, 0, 0, 0.5);
+  }
 
-	nav ul.top-nav.open li ul.sub-menu, nav .primary-nav.open li ul.sub-menu, .primary-nav-container .open li ul.children {
-		background: #3c639a;
-	}
+  nav ul.top-nav.open li ul.sub-menu,
+  nav .primary-nav.open li ul.sub-menu,
+  .primary-nav-container .open li ul.children {
+    background: #3c639a;
+  }
 
-	article.content {
-		border-top: 1px solid #ccc;
-	}
+  article.content {
+    border-top: 1px solid #ccc;
+  }
 
-	article.content h1.page-title {
-		background: #3c639a;
-	}
-	.copyright {
-		background: #3c639a;
-		color: #eee;
-	}
+  article.content h1.page-title {
+    background: #3c639a;
+  }
+  .copyright {
+    background: #3c639a;
+    color: #eee;
+  }
 
-	.copyright a {
-		color: #fff;
-	}
+  .copyright a {
+    color: #fff;
+  }
 }
-			/* Content Color */
-			article.content, footer.post-footer {
-				color: #555555;
-			}
-		
+/* Content Color */
+article.content,
+footer.post-footer {
+  color: #555555;
+}
